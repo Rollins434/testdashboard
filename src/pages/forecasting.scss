@@ -1,0 +1,16 @@
+.forecasting__container {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+
+  ul {
+    display: flex;
+    gap: 1rem;
+    list-style-type: none;
+
+    li {
+      font-size: 20px;
+      padding: 1rem;
+    }
+  }
+}
