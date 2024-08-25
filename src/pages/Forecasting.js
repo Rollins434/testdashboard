@@ -8,7 +8,7 @@ const Forecasting = () => {
       <nav className="forecasting__nav">
         <ul>
           <li>
-            <Link to="tab1">Tab 1</Link>
+            <Link to="tab1">Tab1</Link>
           </li>
           <li>
             <Link to="tab2">Tab 2</Link>
