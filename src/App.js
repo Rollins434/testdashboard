@@ -18,9 +18,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="forecasting" element={<Forecasting />} />
+          <Route path="forecasting" element={<Forecasting />} >
           <Route path="tab1" element={<Tab1 />} />
           <Route path="tab2" element={<Tab2 />} />
+          </Route>
         </Route>
         {/* Separate routes for Login and Signup */}
         <Route path="login" element={<AuthLayout><Login/></AuthLayout>} />
