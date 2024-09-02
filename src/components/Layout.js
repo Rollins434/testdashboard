@@ -2,19 +2,20 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
-import "./layout.scss"
+import "./layout.scss";
 
 const Layout = () => {
+  console.log("Layout component rendered");
+
   return (
     <div className="layout">
       <Navbar />
       <div className="maincontainer">
         <Sidebar />
         <div className="dashboard">
-          <Outlet /> {/* This is where the routed content will be displayed */}
+          <Outlet /> 
         </div>
       </div>
-      {/* <Footer /> */}
     </div>
   );
 };

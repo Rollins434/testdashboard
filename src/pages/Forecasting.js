@@ -3,8 +3,10 @@ import { Link, Outlet } from "react-router-dom";
 import "./forecasting.scss";
 
 const Forecasting = () => {
+  console.log("forecasting")
   return (
     <div className="forecasting__container">
+      <h2>Forecasting</h2>
       <nav className="forecasting__nav">
         <ul>
           <li>
@@ -16,7 +18,7 @@ const Forecasting = () => {
         </ul>
       </nav>
       <div className="forecasting__content">
-        <Outlet /> {/* Child routes will render their content here */}
+        <Outlet /> 
       </div>
     </div>
   );

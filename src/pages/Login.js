@@ -1,15 +1,43 @@
 // src/components/LoginForm/LoginForm.jsx
 
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { AuthContext } from "../context/AuthProvider";
+
+import useAuth from "../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 // import './LoginForm.module.scss';
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from?.pathname || "/";
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Simulate authentication
+  //   setAuth({ user: "aman" });
+  //   // Navigate to the forecasting page after logging in
+  //   navigate("/forecasting");
+  // };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Hardcoded credentials for testing
+    const hardcodedEmail = "test@gmail.com";
+    const hardcodedPassword = "test123";
+
+    if (email === hardcodedEmail && password === hardcodedPassword) {
+      setAuth({ user: true });
+
+      navigate(from, { replace: true });
+    } else {
+      alert("Invalid credentials!");
+    }
+  };
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -30,8 +58,8 @@ const LoginForm = () => {
   //       throw new Error("Something went wrong");
   //     }
 
-  //     const data = await response.json(); 
-  //     console.log(data); 
+  //     const data = await response.json();
+  //     console.log(data);
   //     const accessToken = "get from data"
   //     const roles = "get from data"
   //     setAuth({user,password, roles,accessToken})
@@ -50,7 +78,6 @@ const LoginForm = () => {
   //   }
   // };
 
-  function handleSubmit(){}
   return (
     <Container
       fluid
