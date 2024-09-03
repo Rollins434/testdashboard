@@ -1,5 +1,6 @@
 import React from 'react'
 import "./navbar.scss"
+import LogoutButton from './Logout'
 
 const Navbar = () => {
   return (
@@ -9,6 +10,7 @@ const Navbar = () => {
      </div>
       <div>
         <h2>Name</h2>
+        <LogoutButton/>
       </div>
     </div>
   )

@@ -5,7 +5,8 @@ import Navbar from './Navbar';
 import "./layout.scss";
 
 const Layout = () => {
-  console.log("Layout component rendered");
+  
+  
 
   return (
     <div className="layout">

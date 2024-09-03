@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 // import './LoginForm.module.scss';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const { setAuth } = useAuth();
@@ -16,68 +16,71 @@ const LoginForm = () => {
   const location = useLocation();
   const from = location?.state?.from?.pathname || "/";
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Simulate authentication
-  //   setAuth({ user: "aman" });
-  //   // Navigate to the forecasting page after logging in
-  //   navigate("/forecasting");
-  // };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Hardcoded credentials for testing
-    const hardcodedEmail = "test@gmail.com";
-    const hardcodedPassword = "test123";
 
-    if (email === hardcodedEmail && password === hardcodedPassword) {
-      setAuth({ user: true });
-
-      navigate(from, { replace: true });
+    if (username === "johndoe123" && password === "Temp@7890") {
+      setAuth({ user: "John Doe", role: "admin" });
+    } else if (username === "emilysmith56" && password === "Pass@1234") {
+      setAuth({ user: "Emily Smith", role: "verizon employee" });
+    } else if (username === "mikebrown22" && password === "Quick#5678") {
+      setAuth({ user: "Michael Brown", role: "non verizon employee" });
     } else {
+      setAuth({ user: null, role: null });
       alert("Invalid credentials!");
+      return;
     }
+
+    navigate(from, { replace: true });
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch("your-url-here", {
-  //       method: "POST", // Specify the HTTP method
-  //       headers: {
-  //         "Content-Type": "application/json", // Set the content type to JSON
-  //       },
-  //       body: JSON.stringify({
-  //         email, // Include the email and password in the request body
-  //         password,
-  //       }),
-  //     });
-
-  //     // Check if the response is successful
-  //     if (!response.ok) {
-  //       throw new Error("Something went wrong");
-  //     }
-
-  //     const data = await response.json();
-  //     console.log(data);
-  //     const accessToken = "get from data"
-  //     const roles = "get from data"
-  //     setAuth({user,password, roles,accessToken})
-  //     setEmail("");
-  //     setPassword("");
-  //   } catch (error) {
-  //     if(!error.response){
-  //       setErrorMsg("no server response")
-  //     }else if(error.response.status === 400){
-  //       setErrorMsg("missing username or password")
-  //     }else if(error.response.status === 401){
-  //       setErrorMsg("unauthorized")
-  //     }else {
-  //       setErrorMsg("login failed")
-  //     }
-  //   }
-  // };
-
+  
+  /* const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const response = await fetch(process.env.REACT_APP_LOGIN_URL, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: JSON.stringify({
+          email, 
+          password,
+        }),
+      });
+  
+      // Check if the response is successful
+      if (!response.ok) {
+        if (response.status === 400) {
+          setErrorMsg("Missing username or password");
+        } else if (response.status === 401) {
+          setErrorMsg("Unauthorized");
+        } else {
+          setErrorMsg("Login failed");
+        }
+        return;
+      }
+  
+      const data = await response.json();
+      const accessToken = data.accessToken || ""; // Get accessToken from response data
+      const roles = data.roles || []; // Get roles from response data
+  
+      setAuth({ user: email, roles, accessToken });
+      setEmail("");
+      setPassword("");
+      navigate(from, { replace: true });
+  
+    } catch (error) {
+      if (!error.response) {
+        setErrorMsg("No server response");
+      } else {
+        setErrorMsg("Login failed");
+      }
+    }
+  }; */
+  
   return (
     <Container
       fluid
@@ -88,12 +91,12 @@ const LoginForm = () => {
           <h2 className="text-center mb-4">Login</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>Username</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                placeholder="Enter username"
+                value={username}
+                onChange={(e) => setUserName(e.target.value)}
                 required
               />
             </Form.Group>

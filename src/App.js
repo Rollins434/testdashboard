@@ -20,12 +20,19 @@ function App() {
             index
             element={
               <RequireAuth>
-                <Home />{" "}
+                <Home />
               </RequireAuth>
             }
           />
           {/* Protected route with nested routes */}
-          <Route path="forecasting" element={ <RequireAuth><Forecasting /></RequireAuth>}>
+          <Route
+            path="forecasting"
+            element={
+              <RequireAuth allowedRoles={["admin", "verizon employee"]}>
+                <Forecasting />
+              </RequireAuth>
+            }
+          >
             <Route path="tab1" element={<Tab1 />} />
             <Route path="tab2" element={<Tab2 />} />
           </Route>
@@ -39,7 +46,6 @@ function App() {
             </AuthLayout>
           }
         />
-        {/* <Route path="signup" element={<AuthLayout><Signup /></AuthLayout>} /> */}
       </Routes>
     </div>
   );
