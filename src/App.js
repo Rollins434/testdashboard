@@ -19,6 +19,14 @@ function App() {
           <Route
             index
             element={
+              
+                <Home />
+              
+            }
+          />
+          <Route
+            path="/masspromo"
+            element={
               <RequireAuth>
                 <Home />
               </RequireAuth>

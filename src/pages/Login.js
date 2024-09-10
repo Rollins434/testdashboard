@@ -21,11 +21,11 @@ const LoginForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (username === "johndoe123" && password === "Temp@7890") {
+    if (username === "johndoe123" && password === "Temp7890") {
       setAuth({ user: "John Doe", role: "admin" });
     } else if (username === "emilysmith56" && password === "Pass@1234") {
       setAuth({ user: "Emily Smith", role: "verizon employee" });
-    } else if (username === "mikebrown22" && password === "Quick#5678") {
+    } else if (username === "mikebrown22" && password === "Quick5678") {
       setAuth({ user: "Michael Brown", role: "non verizon employee" });
     } else {
       setAuth({ user: null, role: null });
@@ -35,7 +35,7 @@ const LoginForm = () => {
 
     navigate(from, { replace: true });
   };
-  
+
   /* const handleSubmit = async (e) => {
     e.preventDefault();
   

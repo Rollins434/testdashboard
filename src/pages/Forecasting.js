@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import "./forecasting.scss";
 
 const Forecasting = () => {
-  console.log("forecasting")
+  
   return (
     <div className="forecasting__container">
       <h2>Forecasting</h2>

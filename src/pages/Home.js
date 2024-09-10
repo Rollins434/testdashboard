@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Home.scss"
+import CustomScatterChart from '../components/CustomScatterChart'
 // import Sidebar from '../components/Sidebar'
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
         Container
     </div> */}
     <h1>Home</h1>
+    <CustomScatterChart/>
    </div>
   )
 }
