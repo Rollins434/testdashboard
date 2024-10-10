@@ -12,6 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import FanChart from "../components/FanChart";
 
 const data = [
   { name: "Page A", uv: 4000, pv: 2400, amt: 2400 },
@@ -45,7 +46,12 @@ function renderLineChart() {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+      <Line
+        type="monotone"
+        dataKey="pv"
+        stroke="#8884d8"
+        activeDot={{ r: 8 }}
+      />
       <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
     </LineChart>
   );
@@ -55,13 +61,14 @@ const Tab1 = () => {
   return (
     <Container fluid>
       <Row>
-      <Col lg={8} md={12} className="mb-4 order-lg-1 order-2">
+        <Col lg={8} md={12} className="mb-4 order-lg-1 order-2">
           <div style={{ width: "100%", height: "400px" }}>
-            <ResponsiveContainer width="100%" height="100%">
-              {/* {renderBarChart()} */}
-              {/* Uncomment the next line and comment out the above line to render the line chart */}
-              {renderLineChart()}
-            </ResponsiveContainer>
+          <ResponsiveContainer width="100%" height="100%">
+          {/* {renderBarChart()} */}
+          {/* Uncomment the next line and comment out the above line to render the line chart */}
+          {/* {renderLineChart()} */}
+          <FanChart/>
+          </ResponsiveContainer>
           </div>
         </Col>
         <Col lg={4} md={12} className="mb-4 order-lg-2 order-1">
@@ -94,7 +101,6 @@ const Tab1 = () => {
             </Form.Group>
           </Form>
         </Col>
-     
       </Row>
     </Container>
   );

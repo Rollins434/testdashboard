@@ -9,6 +9,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Forecasting from "./pages/Forecasting";
 import RequireAuth from "./components/RequireAuth";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -16,14 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           {/* Public route */}
-          <Route
-            index
-            element={
-              
-                <Home />
-              
-            }
-          />
+          <Route index element={<Home />} />
           <Route
             path="/masspromo"
             element={
@@ -34,11 +28,11 @@ function App() {
           />
           {/* Protected route with nested routes */}
           <Route
-            path="forecasting"
+            path="/forecasting"
             element={
-              <RequireAuth allowedRoles={["admin", "verizon employee"]}>
-                <Forecasting />
-              </RequireAuth>
+              // <RequireAuth allowedRoles={["admin", "verizon employee"]}>
+              <Forecasting />
+              // </RequireAuth>
             }
           >
             <Route path="tab1" element={<Tab1 />} />

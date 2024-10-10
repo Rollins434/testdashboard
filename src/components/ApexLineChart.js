@@ -3,9 +3,9 @@ import Chart from 'react-apexcharts';
 
 const ApexLineChart = ({ data }) => {
   // Map the data for the chart
-  const forecastValues = data.map(item => parseFloat(item.forecast));
-  const lowerBound = data.map(item => parseFloat(item.Prediction_Interval_Lower));
-  const upperBound = data.map(item => parseFloat(item.Prediction_Interval_Upper));
+  const forecastValues = data.map(item => parseFloat(item.fc));
+  const lowerBound = data.map(item => parseFloat(item.lower));
+  const upperBound = data.map(item => parseFloat(item.upper));
   const runDates = data.map(item => item.RunDate);
 
   // Chart options and data
