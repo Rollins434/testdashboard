@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Chart } from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
+
+// Register all components
+Chart.register(...registerables);
+
+Chart.register(zoomPlugin);
 const FanChart = () => {
   const data = {
     labels: Array.from({ length: 20 }, (_, i) => i + 1), // Labels from 1 to 20
@@ -41,10 +47,32 @@ const FanChart = () => {
       y: {
         beginAtZero: true,
       },
+      x: {
+        type: 'linear', // Ensure x-axis is linear
+        position: 'bottom',
+      },
+    },
+    plugins: {
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true, // Enable zooming with mouse wheel
+          },
+          pinch: {
+            enabled: true, // Enable pinch-to-zoom on touch devices
+          },
+          mode: 'xy', // Allow zooming in both directions
+        },
+        pan: {
+          enabled: true, // Enable panning
+          mode: 'xy', // Allow panning in both directions
+        },
+      },
     },
   };
 
   useEffect(() => {
+    // Cleanup Chart.js registry
     return () => {
       Chart.unregister();
     };
@@ -52,7 +80,7 @@ const FanChart = () => {
 
   return (
     <div>
-      <h2>Fan Chart with Smooth Forecast Transition</h2>
+      <h2>Fan Chart with Smooth Forecast Transition and Zoom</h2>
       <Line data={data} options={options} />
     </div>
   );

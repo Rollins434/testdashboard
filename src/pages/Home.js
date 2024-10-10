@@ -2,6 +2,7 @@ import React from 'react'
 import "./Home.scss"
 import CustomScatterChart from '../components/CustomScatterChart'
 import SidebarAccordion from '../components/SidebarAccordion'
+import FanChart from '../components/FanChart'
 // import Sidebar from '../components/Sidebar'
 
 const Home = () => {
@@ -13,7 +14,8 @@ const Home = () => {
     </div> */}
     <h1>Home</h1>
     {/* <CustomScatterChart/> */}
-    <SidebarAccordion/>
+    {/* <SidebarAccordion/> */}
+    <FanChart/>
     
    </div>
   )
