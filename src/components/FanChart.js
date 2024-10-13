@@ -17,7 +17,7 @@ const FanChart = () => {
     date.setDate(today.getDate() - (8 - i)); // Create dates from today back to 9 days ago
     return date;
   });
-
+console.log("actual",actualDays)
   // Start the forecast from the next day after actuals
   const forecastDays = Array.from({ length: 11 }, (_, i) => {
     const date = new Date(today);
