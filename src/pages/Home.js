@@ -19,10 +19,10 @@ const Home = () => {
 
     {/* <CustomScatterChart/> */}
     {/* <SidebarAccordion/> */}
-    {/* <FanChart/> */}
+    <FanChart/>
     {/* <FanChartB/> */}
     {/* in below chart i am trying to get date limit done */}
-    <FanChartC/>
+    {/* <FanChartC/> */}
     {/* <PlotlyFanChart/> */}
     
    </div>

@@ -7,24 +7,7 @@ import { format } from "date-fns";
 // Register all components
 Chart.register(...registerables, zoomPlugin);
 
-// Define a custom plugin for borders and pan area boundary
-const borderPlugin = {
-  id: 'borderPlugin',
-  beforeDraw(chart) {
-    const { ctx, chartArea: { left, top, width, height } } = chart;
-    ctx.save();
-    
-    // Draw the boundary rectangle for panning area
-    ctx.strokeStyle = 'rgba(255, 0, 0, 0.3)'; // Red color for boundary
-    ctx.lineWidth = 1;
-    
-    // Define the area for panning (25% of the chart area)
-    ctx.strokeRect(left + width * 0.25, top + height * 0.25, width / 2, height / 2);
-    ctx.restore();
-  },
-};
 
-Chart.register(borderPlugin); // Register the custom plugin
 
 const FanChartC = () => {
   // Define start and end dates
