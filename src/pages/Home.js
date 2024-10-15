@@ -7,6 +7,7 @@ import FanChartB from '../components/FanChartB'
 
 import FanChartC from '../components/FanChartC'
 import StackedBarChart from '../components/StackedBarChart'
+import ThreeLineChart from '../components/ThreeLineChart'
 
 // import Sidebar from '../components/Sidebar'
 
@@ -24,7 +25,9 @@ const Home = () => {
     {/* <FanChartB/> */}
     {/* in below chart i am trying to get date limit done */}
     {/* <FanChartC/> */}
-    <StackedBarChart/>
+    {/* <StackedBarChart/> */}
+
+    <ThreeLineChart/>
     
    </div>
   )
