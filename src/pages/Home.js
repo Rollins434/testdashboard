@@ -4,8 +4,9 @@ import CustomScatterChart from '../components/CustomScatterChart'
 import SidebarAccordion from '../components/SidebarAccordion'
 import FanChart from '../components/FanChart'
 import FanChartB from '../components/FanChartB'
-import PlotlyFanChart from '../components/PlotlyFanChart'
+
 import FanChartC from '../components/FanChartC'
+import StackedBarChart from '../components/StackedBarChart'
 
 // import Sidebar from '../components/Sidebar'
 
@@ -19,11 +20,11 @@ const Home = () => {
 
     {/* <CustomScatterChart/> */}
     {/* <SidebarAccordion/> */}
-    <FanChart/>
+    {/* <FanChart/> */}
     {/* <FanChartB/> */}
     {/* in below chart i am trying to get date limit done */}
     {/* <FanChartC/> */}
-    {/* <PlotlyFanChart/> */}
+    <StackedBarChart/>
     
    </div>
   )
