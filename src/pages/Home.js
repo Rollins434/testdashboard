@@ -10,6 +10,8 @@ import StackedBarChart from "../components/StackedBarChart";
 import FanChartWithRestrictions from "../components/FanChartWithRestrictions";
 import SimpleTable from "../components/tables/SimpleTable";
 import {
+  dailyForecastData,
+  dailyForecastDataColumns,
   forecastAccuracyColumns,
   forecastAccuracyData,
   forecastModelComparisonColumns,
@@ -88,6 +90,13 @@ const Home = () => {
             ],
             rowTextColors: ["white"],
           }}
+        />
+
+        <br />
+        <NestedColumnTable
+          data={dailyForecastData}
+          columns={dailyForecastDataColumns}
+          showPagination
         />
       </div>
 

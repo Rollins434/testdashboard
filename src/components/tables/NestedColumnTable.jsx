@@ -3,12 +3,15 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   flexRender,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import { styles } from "./tableStyles";
+import { useState } from "react";
 
 // interface NestedColumnTableProps<T> {
 //   columns: ColumnDef<T, any>[];
 //   data: T[];
+//   showPagination?: boolean;
 //   styleOptions?: {
 //     rowBackgroundColors: Array<string | null>
 //     rowTextColors: Array<string | null>
@@ -18,14 +21,42 @@ import { styles } from "./tableStyles";
 function NestedColumnTable({
   columns,
   data,
+  showPagination = false,
   styleOptions = { rowBackgroundColors: [], rowTextColors: [] },
 }) {
+  const [pageSize, setPageSize] = useState(10);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [sorting, setSorting] = useState([]);
+
   const table = useReactTable({
     data,
     columns,
+    pageCount: Math.ceil(data.length / pageSize),
+    state: {
+      pagination: {
+        pageIndex,
+        pageSize,
+      },
+      sorting,
+    },
+    onSortingChange: setSorting,
+    onPaginationChange: (updater) => {
+      const newPaginationState =
+        typeof updater === "function"
+          ? updater({ pageIndex, pageSize })
+          : updater;
+      setPageIndex(newPaginationState.pageIndex);
+      setPageSize(newPaginationState.pageSize);
+    },
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
+
+  const handlePageSizeChange = (event) => {
+    setPageSize(Number(event.target.value));
+    table.setPageSize(Number(event.target.value));
+  };
 
   return (
     <div style={styles.CONTAINER}>
@@ -90,6 +121,83 @@ function NestedColumnTable({
           </tbody>
         </table>
       </div>
+
+      {showPagination && (
+        <>
+          {/* Pagination controls */}
+          <div className="pagination" style={styles.PAGINATION}>
+            {/* Rows per page selection */}
+            <div>
+              <label htmlFor="pageSize">Rows per page:</label>
+              <select
+                id="pageSize"
+                value={pageSize}
+                onChange={handlePageSizeChange}
+                className="pagination_dropdown"
+                style={styles.PAGINATION_DROPDOWN}
+              >
+                {[5, 10, 20, 30].map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Pagination controls */}
+            <div className="pagination_ctrls" style={styles.PAGINATION_CTRLS}>
+              <button
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+                className="pagination_ctrls_btns"
+                style={{
+                  ...styles.PAGINATION_CTRLS_BTNS,
+                  fontWeight: table.getCanPreviousPage() ? "800" : "400",
+                }}
+              >
+                ← Prev
+              </button>
+
+              {[
+                table.getState().pagination.pageIndex - 1, // Previous page
+                table.getState().pagination.pageIndex, // Current page
+                table.getState().pagination.pageIndex + 1, // Next page
+                table.getState().pagination.pageIndex + 2, // Next-next page
+              ]
+                .filter((page) => page >= 0 && page < table.getPageCount()) // Ensure pages are within bounds
+                .map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => table.setPageIndex(page)}
+                    className="pagination_ctrls_btns"
+                    style={{
+                      ...styles.PAGINATION_CTRLS_BTNS,
+                      width: "auto",
+                      fontWeight:
+                        table.getState().pagination.pageIndex === page
+                          ? "bold"
+                          : "normal",
+                    }}
+                  >
+                    {page + 1} {/* Page numbers are 1-based for display */}
+                  </button>
+                ))}
+
+              <button
+                onClick={() => table.nextPage()}
+                disabled={!table.getCanNextPage()}
+                className="pagination_ctrls_btns"
+                style={{
+                  ...styles.PAGINATION_CTRLS_BTNS,
+                  fontWeight: table.getCanNextPage() ? "800" : "400",
+                }}
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
