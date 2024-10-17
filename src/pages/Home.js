@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import "./Home.scss";
 import CustomScatterChart from "../components/CustomScatterChart";
 import SidebarAccordion from "../components/SidebarAccordion";
@@ -19,6 +19,22 @@ import {
 // import Sidebar from '../components/Sidebar'
 
 const Home = () => {
+  const [size, setSize] = useState(0);
+  const containerRef = useRef(null);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      if (!containerRef.current) return;
+      const containerWidth = containerRef.current.offsetWidth;
+      setSize(containerWidth);
+    }
+
+    window.addEventListener("resize", updateSize);
+    return () => {
+      window.removeEventListener("resize", updateSize);
+    };
+  }, []);
+
   return (
     <div className="home">
       {/* <Sidebar/>
@@ -32,19 +48,23 @@ const Home = () => {
       {/* <FanChartB/> */}
 
       {/* <FanChartWithRestrictions /> */}
-      <div style={{ display: "block" }}>
+      <div ref={containerRef} style={{ display: "block" }}>
         <SimpleTable
           columns={forecastAccuracyColumns}
           data={forecastAccuracyData}
-          styleOptions={{ fixedTableLayout: true }}
+          styleOptions={{
+            fixedTableLayout: size > 768 ? true : false,
+            wrapHeaders: true,
+          }}
         />
-
         <br />
-
         <SimpleTable
           columns={forecastModelComparisonColumns}
           data={forecastModelComparisonData}
-          styleOptions={{ wrapHeaders: true, fixedTableLayout: true }}
+          styleOptions={{
+            fixedTableLayout: size > 768 ? true : false,
+            wrapHeaders: size > 768 ? true : false,
+          }}
         />
       </div>
 
