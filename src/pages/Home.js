@@ -14,7 +14,10 @@ import {
   forecastAccuracyData,
   forecastModelComparisonColumns,
   forecastModelComparisonData,
+  templateTableData,
+  templateTableDataColumns,
 } from "../components/tables/forecast_data";
+import NestedColumnTable from "../components/tables/NestedColumnTable";
 
 // import Sidebar from '../components/Sidebar'
 
@@ -64,6 +67,26 @@ const Home = () => {
           styleOptions={{
             fixedTableLayout: size > 768 ? true : false,
             wrapHeaders: size > 768 ? true : false,
+          }}
+        />
+        <br />
+        <NestedColumnTable
+          data={templateTableData}
+          columns={templateTableDataColumns}
+          styleOptions={{
+            rowBackgroundColors: [
+              "gray",
+              "lightgray",
+              null,
+              null,
+              null,
+              "lightgray",
+              null,
+              null,
+              "lightgray",
+              null,
+            ],
+            rowTextColors: ["white"],
           }}
         />
       </div>

@@ -395,3 +395,249 @@ export const forecastModelComparisonData = [
     prior_year_actuals: 1004,
   },
 ];
+
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+// type TemplateTableType = {
+//   channel: string;
+//   "Jul-24": number;
+//   "Aug-24": number;
+//   "Sep-24": number;
+//   "Q3-2024": number;
+
+//   "Jul-24_2": number;
+//   "Aug-24_2": number;
+//   "Sep-24_2": number;
+//   "Q3-2024_2": number;
+
+//   "Sep-24_3": number;
+//   "Sep-24_4": number;
+//   "Sep-24_Percentage": number;
+// };
+
+export const templateTableDataColumns = [
+  {
+    header: " ", // Space character to Hide Header name
+    columns: [
+      {
+        header: "Channel",
+        accessorKey: "channel",
+      },
+    ],
+  },
+  {
+    header: "Model C Latest Forecast",
+    columns: [
+      {
+        header: "Jul-24",
+        accessorKey: "Jul-24",
+      },
+      {
+        header: "Aug-24",
+        accessorKey: "Aug-24",
+      },
+      {
+        header: "Sep-24",
+        accessorKey: "Sep-24",
+      },
+      {
+        header: "Q3-2024",
+        accessorKey: "Q3-2024",
+      },
+    ],
+  },
+
+  {
+    header: " ", // Space character to Hide Header name
+  },
+
+  {
+    header: "Model C Week 1 Forecast",
+    columns: [
+      {
+        header: "Jul-24",
+        accessorKey: "Jul-24_2",
+      },
+      {
+        header: "Aug-24",
+        accessorKey: "Aug-24_2",
+      },
+      {
+        header: "Sep-24",
+        accessorKey: "Sep-24_2",
+      },
+      {
+        header: "Q3-2024",
+        accessorKey: "Q3-2024_2",
+      },
+    ],
+  },
+
+  {
+    header: " ", // Using this header for displaying a GAP
+  },
+
+  {
+    header: "Model C Week 1 Accuracy",
+    columns: [
+      {
+        header: "Sep-24\n(Actuals MTD)",
+        accessorKey: "Sep-24_3",
+      },
+      {
+        header: "Sep-24\n(Forecast MTD)",
+        accessorKey: "Sep-24_4",
+      },
+      {
+        header: "Sep-24\n(Accuracy %)",
+        accessorKey: "Sep-24_Percentage",
+        cell: (info) => info.getValue() + "%",
+      },
+    ],
+  },
+];
+
+export const templateTableData = [
+  {
+    channel: "Disconnects",
+    "Jul-24": 6570,
+    "Aug-24": 6654,
+    "Sep-24": 6758,
+    "Q3-2024": 19982,
+    "Jul-24_2": 6740,
+    "Aug-24_2": 6645,
+    "Sep-24_2": 6666,
+    "Q3-2024_2": 20051,
+    "Sep-24_3": 3262,
+    "Sep-24_4": 3353,
+    "Sep-24_Percentage": 102.79,
+  },
+  {
+    channel: "CSO Managed",
+    "Jul-24": 3313,
+    "Aug-24": 3350,
+    "Sep-24": 3435,
+    "Q3-2024": 10098,
+    "Jul-24_2": 3392,
+    "Aug-24_2": 3163,
+    "Sep-24_2": 3328,
+    "Q3-2024_2": 9883,
+    "Sep-24_3": 1635,
+    "Sep-24_4": 1748,
+    "Sep-24_Percentage": 106.91,
+  },
+  {
+    channel: "Stores",
+    "Jul-24": 1135,
+    "Aug-24": 1038,
+    "Sep-24": 1155,
+    "Q3-2024": 3328,
+    "Jul-24_2": 1095,
+    "Aug-24_2": 1021,
+    "Sep-24_2": 1171,
+    "Q3-2024_2": 3287,
+    "Sep-24_3": 541,
+    "Sep-24_4": 591,
+    "Sep-24_Percentage": 109.24,
+  },
+  {
+    channel: "Agent",
+    "Jul-24": 1018,
+    "Aug-24": 1168,
+    "Sep-24": 1095,
+    "Q3-2024": 3281,
+    "Jul-24_2": 1102,
+    "Aug-24_2": 1138,
+    "Sep-24_2": 1114,
+    "Q3-2024_2": 3354,
+    "Sep-24_3": 533,
+    "Sep-24_4": 581,
+    "Sep-24_Percentage": 109.01,
+  },
+  {
+    channel: "National Retail",
+    "Jul-24": 1160,
+    "Aug-24": 1144,
+    "Sep-24": 1185,
+    "Q3-2024": 3489,
+    "Jul-24_2": 1195,
+    "Aug-24_2": 1004,
+    "Sep-24_2": 1043,
+    "Q3-2024_2": 3242,
+    "Sep-24_3": 561,
+    "Sep-24_4": 576,
+    "Sep-24_Percentage": 102.67,
+  },
+  {
+    channel: "CCS Managed",
+    "Jul-24": 2090,
+    "Aug-24": 2223,
+    "Sep-24": 2210,
+    "Q3-2024": 6523,
+    "Jul-24_2": 2227,
+    "Aug-24_2": 2364,
+    "Sep-24_2": 2258,
+    "Q3-2024_2": 6849,
+    "Sep-24_3": 1116,
+    "Sep-24_4": 1049,
+    "Sep-24_Percentage": 94.0,
+  },
+  {
+    channel: "Inside Sales",
+    "Jul-24": 1082,
+    "Aug-24": 1049,
+    "Sep-24": 1062,
+    "Q3-2024": 3193,
+    "Jul-24_2": 1157,
+    "Aug-24_2": 1182,
+    "Sep-24_2": 1101,
+    "Q3-2024_2": 3440,
+    "Sep-24_3": 597,
+    "Sep-24_4": 528,
+    "Sep-24_Percentage": 88.44,
+  },
+  {
+    channel: "CS & Other",
+    "Jul-24": 1008,
+    "Aug-24": 1174,
+    "Sep-24": 1148,
+    "Q3-2024": 3330,
+    "Jul-24_2": 1070,
+    "Aug-24_2": 1182,
+    "Sep-24_2": 1157,
+    "Q3-2024_2": 3409,
+    "Sep-24_3": 519,
+    "Sep-24_4": 521,
+    "Sep-24_Percentage": 100.39,
+  },
+  {
+    channel: "CXO Managed",
+    "Jul-24": 1167,
+    "Aug-24": 1081,
+    "Sep-24": 1113,
+    "Q3-2024": 3361,
+    "Jul-24_2": 1121,
+    "Aug-24_2": 1118,
+    "Sep-24_2": 1080,
+    "Q3-2024_2": 3319,
+    "Sep-24_3": 511,
+    "Sep-24_4": 556,
+    "Sep-24_Percentage": 108.81,
+  },
+  {
+    channel: "Digital",
+    "Jul-24": 1167,
+    "Aug-24": 1081,
+    "Sep-24": 1113,
+    "Q3-2024": 3361,
+    "Jul-24_2": 1121,
+    "Aug-24_2": 1118,
+    "Sep-24_2": 1080,
+    "Q3-2024_2": 3319,
+    "Sep-24_3": 511,
+    "Sep-24_4": 556,
+    "Sep-24_Percentage": 108.81,
+  },
+];
