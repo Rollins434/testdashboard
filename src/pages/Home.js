@@ -7,8 +7,8 @@ import FanChartB from "../components/FanChartB";
 
 import FanChartC from "../components/FanChartC";
 import StackedBarChart from "../components/StackedBarChart";
-import FanChartWithRestrictions from "../components/FanChartWithRestrictions";
-import SimpleTable from "../components/tables/SimpleTable";
+import FanChartWithRestrictions from "../components/charts_and_tables/FanChartWithRestrictions";
+import SimpleTable from "../components/charts_and_tables/SimpleTable";
 import {
   dailyForecastData,
   dailyForecastDataColumns,
@@ -16,10 +16,12 @@ import {
   forecastAccuracyData,
   forecastModelComparisonColumns,
   forecastModelComparisonData,
+  linechartActualData,
+  linechartForecastData,
   templateTableData,
   templateTableDataColumns,
-} from "../components/tables/forecast_data";
-import NestedColumnTable from "../components/tables/NestedColumnTable";
+} from "../components/charts_and_tables/forecast_data";
+import NestedColumnTable from "../components/charts_and_tables/NestedColumnTable";
 
 // import Sidebar from '../components/Sidebar'
 
@@ -52,8 +54,12 @@ const Home = () => {
       {/* <FanChart/> */}
       {/* <FanChartB/> */}
 
-      {/* <FanChartWithRestrictions /> */}
       <div ref={containerRef} style={{ display: "block" }}>
+        <FanChartWithRestrictions
+          actualData={linechartActualData}
+          forecastData={linechartForecastData}
+        />
+        <br />
         <SimpleTable
           columns={forecastAccuracyColumns}
           data={forecastAccuracyData}
