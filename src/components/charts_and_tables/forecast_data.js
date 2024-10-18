@@ -1,40 +1,51 @@
 // import { ColumnDef } from "@tanstack/react-table";
 
+const COLORS = {
+  BLUE: "0, 0, 255",
+  DBLUE: "",
+  LBLUE: "",
+
+  GREEN: "41, 171, 77",
+  DGREEN: "",
+  LGREEN: "",
+};
+
 export const linechartActualData = {
   data: [50, 55, 60, 62, 65, 68, 70, 75, 78], // LENGTH = 9
+  borderColor: "orange",
 };
 
 export const linechartForecastData = {
   ModelA: {
     mean: {
       data: [80, 82, 85, 88, 90, 92, 94, 96, 98, 100, 102], // LENGTH = 11
-      borderColor: "rgba(153, 102, 255, 1)",
+      borderColor: `rgba(${COLORS.BLUE}, 1)`,
     },
     upper_bound: {
       data: [90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140],
-      borderColor: "rgba(255, 99, 132, 0.5)",
-      backgroundColor: "rgba(255, 99, 132, 0.2)",
+      borderColor: `rgba(${COLORS.BLUE}, 0)`,
+      backgroundColor: `rgba(${COLORS.BLUE}, 0.1)`,
     },
     lower_bound: {
       data: [70, 75, 76, 78, 80, 82, 84, 86, 88, 90, 92],
-      borderColor: "rgba(54, 162, 235, 0.5)",
-      backgroundColor: "rgba(54, 162, 235, 0.2)",
+      borderColor: `rgba(${COLORS.BLUE}, 0)`,
+      backgroundColor: `rgba(${COLORS.BLUE}, 0.1)`,
     },
   },
   ModelB: {
     mean: {
       data: [85, 87, 90, 93, 95, 97, 99, 101, 103, 105, 107],
-      borderColor: "rgba(255, 206, 86, 1)",
+      borderColor: `rgba(${COLORS.GREEN}, 1)`,
     },
     upper_bound: {
       data: [95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145],
-      borderColor: "rgba(255, 159, 64, 0.5)",
-      backgroundColor: "rgba(255, 159, 64, 0.2)",
+      borderColor: `rgba(${COLORS.GREEN}, 0)`,
+      backgroundColor: `rgba(${COLORS.GREEN}, 0.1)`,
     },
     lower_bound: {
       data: [75, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98],
-      borderColor: "rgba(54, 162, 235, 0.5)",
-      backgroundColor: "rgba(54, 162, 235, 0.2)",
+      borderColor: `rgba(${COLORS.GREEN}, 0)`,
+      backgroundColor: `rgba(${COLORS.GREEN}, 0.1)`,
     },
   },
 };

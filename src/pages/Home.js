@@ -61,6 +61,7 @@ const Home = () => {
         />
         <br />
         <SimpleTable
+          datasetName={"forecastAccuracy"}
           columns={forecastAccuracyColumns}
           data={forecastAccuracyData}
           styleOptions={{
@@ -70,6 +71,7 @@ const Home = () => {
         />
         <br />
         <SimpleTable
+          datasetName={"forecastModelComparison"}
           columns={forecastModelComparisonColumns}
           data={forecastModelComparisonData}
           styleOptions={{
@@ -79,6 +81,7 @@ const Home = () => {
         />
         <br />
         <NestedColumnTable
+          datasetName={"templateTable"}
           data={templateTableData}
           columns={templateTableDataColumns}
           styleOptions={{
@@ -100,6 +103,7 @@ const Home = () => {
 
         <br />
         <NestedColumnTable
+          datasetName={"dailyForecast"}
           data={dailyForecastData}
           columns={dailyForecastDataColumns}
           showPagination
