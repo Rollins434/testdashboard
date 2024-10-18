@@ -162,9 +162,6 @@ const FanChartWithRestrictions = ({ actualData, forecastData }) => {
         borderWidth: 2,
         borderColor: "rgba(100,100,100,0.15)",
         titleMarginBottom: 0,
-        footerMarginTop: 0,
-        boxHeight: 0,
-        boxWidth: 0,
 
         filter: function (tooltipItem) {
           return [0, 1].includes(tooltipItem.datasetIndex);
@@ -249,7 +246,7 @@ const FanChartWithRestrictions = ({ actualData, forecastData }) => {
         position: "relative",
       }}
     >
-      <h2>Fan Chart 2</h2>
+      <h2>Fan Chart</h2>
       <div
         style={{
           position: "absolute",
