@@ -14,19 +14,21 @@ const FanChartWithRestrictions = ({ actualData, forecastData }) => {
   const endDate = getDateWithOffset(+forecastDataDaysLength);
   const dateLabels = generateDateLabels(startDate, endDate);
 
+  const today = new Date();
   const lastActualDataPoint = actualData.data.at(-1);
-  const startDay = 3; // "Monday"
+  const startDay = 4;
+
   const pointStyleFn = (data) => {
-    return (data.dataIndex - startDay) % 7 === 0 ? 4 : 0;
+    return (data.dataIndex + startDay) % 7 === 0 ? 4 : 0;
   };
   const pointBackgroundColorFn = (data) => {
-    return (data.dataIndex - startDay) % 7 === 0 ? "white" : "transparent";
+    return (data.dataIndex + startDay) % 7 === 0 ? "white" : "transparent";
   };
   const pointBorderColorFn = (data) => {
-    return (data.dataIndex - startDay) % 7 === 0 ? "black" : "white";
+    return (data.dataIndex + startDay) % 7 === 0 ? "black" : "white";
   };
   const pointBorderWidthFn = (data) => {
-    return (data.dataIndex - startDay) % 7 === 0 ? 2 : 0;
+    return (data.dataIndex + startDay) % 7 === 0 ? 2 : 0;
   };
 
   const chartData = {
@@ -35,7 +37,7 @@ const FanChartWithRestrictions = ({ actualData, forecastData }) => {
       {
         label: "Actual Data",
         data: actualData.data,
-        borderColor: "rgba(75,192,192,1)",
+        borderColor: actualData.borderColor,
         fill: false,
         pointRadius: (data) => pointStyleFn(data),
         pointBackgroundColor: (data) => pointBackgroundColorFn(data),
@@ -124,9 +126,20 @@ const FanChartWithRestrictions = ({ actualData, forecastData }) => {
         beginAtZero: true,
         min: 0,
         max: 200, // Set maximum value for y-axis
+        ticks: {
+          // stepSize: 10,
+          precision: 1,
+          callback: function (value) {
+            if (value >= 1000) {
+              return Math.round(value / 1000, 1) + "K";
+            }
+            return Math.round(value, 1);
+          },
+        },
       },
       x: {
         min: 0, // Set minimum value for x-axis
+        offset: false,
       },
     },
     plugins: {
@@ -139,6 +152,9 @@ const FanChartWithRestrictions = ({ actualData, forecastData }) => {
             enabled: true, // Enable pinch-to-zoom on touch devices
           },
           mode: "xy", // Allow zooming in both directions
+          // onZoomComplete: function ({ chart }) {
+          //   chart.update(); // Update chart after zoom to apply formatting
+          // },
         },
         pan: {
           enabled: true, // Enable panning
@@ -162,12 +178,9 @@ const FanChartWithRestrictions = ({ actualData, forecastData }) => {
         borderWidth: 2,
         borderColor: "rgba(100,100,100,0.15)",
         titleMarginBottom: 0,
-        footerMarginTop: 0,
-        boxHeight: 0,
-        boxWidth: 0,
 
         filter: function (tooltipItem) {
-          return [0, 1].includes(tooltipItem.datasetIndex);
+          return [0, 1, 4].includes(tooltipItem.datasetIndex);
         },
 
         callbacks: {
@@ -201,22 +214,27 @@ const FanChartWithRestrictions = ({ actualData, forecastData }) => {
             ) {
               return null; // Disable tooltip for these datasets
             }
-
-            return `𝗠𝗼𝗱𝗲𝗹 𝗔\nForecast - 120\nMTD - 550`;
+            if (tooltipItem.datasetIndex === 0) {
+              return `𝗠𝗼𝗱𝗲𝗹 𝗔\nMTD - 550\n\n𝗠𝗼𝗱𝗲𝗹 𝗕\nMTD - 500`;
+            } else if (tooltipItem.datasetIndex === 1) {
+              let result = "𝗠𝗼𝗱𝗲𝗹 𝗔";
+              if (tooltipItem.datasetIndex === 1) {
+                result += `\nForecast - ${tooltipItem.parsed.y}`;
+              }
+              result += "\nMTD - 550";
+              return result;
+            } else if (tooltipItem.datasetIndex === 4) {
+              let result = "\n𝗠𝗼𝗱𝗲𝗹 𝗕";
+              if (tooltipItem.datasetIndex === 4) {
+                result += `\nForecast - ${tooltipItem.parsed.y}`;
+              }
+              result += "\nMTD - 500";
+              return result;
+            }
+            return "";
           },
           label: (value) => {
-            return ` `;
-          },
-          afterLabel: (tooltipItem) => {
-            const datasetLabel = tooltipItem.dataset.label;
-            if (
-              datasetLabel.includes("Upper Bound") ||
-              datasetLabel.includes("Lower Bound")
-            ) {
-              return null; // Disable tooltip for these datasets
-            }
-
-            return `𝗠𝗼𝗱𝗲𝗹 𝗕\nForecast - 110\nMTD - 500`;
+            return "";
           },
         },
       },
@@ -301,7 +319,6 @@ function generateDateLabels(startDate, endDate) {
     // Move to the next day
     start.setDate(start.getDate() + 1);
   }
-
   return dateArray;
 }
 // function getCurrentDate() {
@@ -355,6 +372,17 @@ function formatDate(inputDate) {
     "December",
   ];
 
+  // Define an array of weekday names
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
   // Function to get the ordinal suffix for the day
   const getOrdinalSuffix = (day) => {
     if (day > 3 && day < 21) return "th"; // Covers 11th to 13th
@@ -370,8 +398,14 @@ function formatDate(inputDate) {
     }
   };
 
+  // Create a Date object using the input date
+  const dateObject = new Date(year, month - 1, day);
+
+  // Get the name of the day of the week
+  const dayOfWeek = dayNames[dateObject.getDay()].slice(0, 3);
+
   // Format the date
-  const formattedDate = `${day}${getOrdinalSuffix(day)} ${
+  const formattedDate = `${dayOfWeek}, ${day}${getOrdinalSuffix(day)} ${
     monthNames[month - 1]
   }, ${year}`;
 

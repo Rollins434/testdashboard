@@ -19,6 +19,7 @@ import { useState } from "react";
 // }
 
 function NestedColumnTable({
+  datasetName,
   columns,
   data,
   showPagination = false,
@@ -65,13 +66,14 @@ function NestedColumnTable({
           <thead style={styles.THEAD}>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr
-                data-headerGroup={headerGroup.id}
-                key={headerGroup.id}
+                data-key={"headerGroup-" + headerGroup.id}
+                key={datasetName + "-headerGroup-" + headerGroup.id}
                 style={styles.THEAD_TR}
               >
                 {headerGroup.headers.map((header) => (
                   <th
-                    key={header.id}
+                    data-key={"header-" + header.index}
+                    key={datasetName + "-header-" + header.index}
                     style={{
                       ...styles.THEAD_TR_TH,
                       textAlign: header.colSpan > 1 ? "center" : "left",
@@ -98,7 +100,7 @@ function NestedColumnTable({
           <tbody style={styles.TBODY}>
             {table.getRowModel().rows.map((row) => (
               <tr
-                key={row.id}
+                key={datasetName + "-dataRow-" + row.id}
                 style={{
                   ...styles.TBODY_TR,
                   backgroundColor: styleOptions?.rowBackgroundColors.length
@@ -109,10 +111,18 @@ function NestedColumnTable({
                     ? styleOptions.rowTextColors[Number(row.id)] || "default"
                     : "default",
                 }}
-                data-rowid={row.id}
               >
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} style={styles.TBODY_TR_TD}>
+                {row.getVisibleCells().map((cell, cellIdx) => (
+                  <td
+                    key={
+                      datasetName +
+                      "-dataRow-" +
+                      row.id +
+                      "-dataCell-" +
+                      cellIdx
+                    }
+                    style={styles.TBODY_TR_TD}
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

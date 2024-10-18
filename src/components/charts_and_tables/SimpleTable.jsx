@@ -19,6 +19,7 @@ import { styles } from "./tableStyles";
 // }
 
 export function SimpleTable({
+  datasetName,
   columns,
   data,
   styleOptions = { fixedTableLayout: false, wrapHeaders: false },
@@ -77,10 +78,10 @@ export function SimpleTable({
         >
           <thead style={styles.THEAD}>
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
+              <tr key={datasetName + "-headerGroup-" + headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
-                    key={header.id}
+                    key={datasetName + "-header-" + header.id}
                     style={{
                       ...styles.THEAD_TR_TH,
                       textWrap: styleOptions.wrapHeaders ? "wrap" : "nowrap",
@@ -131,9 +132,21 @@ export function SimpleTable({
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} style={styles.TBODY_TR}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} style={styles.TBODY_TR_TD}>
+              <tr
+                key={datasetName + "-dataRow-" + row.id}
+                style={styles.TBODY_TR}
+              >
+                {row.getVisibleCells().map((cell, cellIdx) => (
+                  <td
+                    key={
+                      datasetName +
+                      "-dataRow-" +
+                      row.id +
+                      "-dataCell-" +
+                      cellIdx
+                    }
+                    style={styles.TBODY_TR_TD}
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
