@@ -22,6 +22,8 @@ import {
   templateTableDataColumns,
 } from "../components/charts_and_tables/forecast_data";
 import NestedColumnTable from "../components/charts_and_tables/NestedColumnTable";
+import DailyForecastFilters from "../components/filters/DailyForecastFilters";
+import CustomAccordion from "../components/filters/CustomAccordion";
 
 // import Sidebar from '../components/Sidebar'
 
@@ -55,6 +57,10 @@ const Home = () => {
       {/* <FanChartB/> */}
 
       <div ref={containerRef} style={{ display: "block" }}>
+        <CustomAccordion title={"Additional Filters"}>
+          <DailyForecastFilters />
+        </CustomAccordion>
+        <br />
         <FanChartWithRestrictions
           actualData={linechartActualData}
           forecastData={linechartForecastData}
