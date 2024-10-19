@@ -4,7 +4,6 @@ const COLORS = {
   BLUE: "0, 0, 255",
   DBLUE: "",
   LBLUE: "",
-
   GREEN: "41, 171, 77",
   DGREEN: "",
   LGREEN: "",
