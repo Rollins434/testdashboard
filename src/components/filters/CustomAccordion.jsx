@@ -12,11 +12,12 @@ const Accordion = ({ title, children }) => {
     <div className="accordion">
       <div className="accordion-header" onClick={toggleAccordion}>
         <h3>{title}</h3>
-        <span className={`accordion-toggle ${isOpen ? "rotate" : ""}`}>
-          ▼
-        </span>
+        <span className={`accordion-toggle ${isOpen ? "rotate" : ""}`}>▼</span>
       </div>
-      <div className={`accordion-content ${isOpen ? "open" : ""}`}>
+      <div
+        className={`accordion-content ${isOpen ? "open" : ""}`}
+        style={{ overflow: isOpen ? "visible" : "hidden" }}
+      >
         {children}
       </div>
     </div>

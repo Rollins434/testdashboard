@@ -2,6 +2,8 @@ import Select from "react-select";
 import { useDailyForecastFilters } from "../../hooks/useDailyForecastFilters";
 import "./filtersLayout.scss";
 
+const placeholderSelectText = "--select--";
+
 export default function DailyForecastFilters() {
   const { month, year, market, channel, device, data, byod, setFilters } =
     useDailyForecastFilters();
@@ -21,67 +23,95 @@ export default function DailyForecastFilters() {
   const selectedByod = filtersByByodOptions.find((op) => op.value === byod);
 
   return (
-    <div className="filtersContainer">
+    <div className="filtersContainer" style={{ fontSize: "0.8rem" }}>
       <div>
         <label>Filter by Month</label>
         <Select
+          isClearable
           value={selectedMonth}
           options={filtersByMonthOptions}
-          onChange={(e) => setFilters({ month: e?.value || undefined })}
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          onChange={(e) => setFilters({ month: e?.value || null })}
+          placeholder={placeholderSelectText}
         />
       </div>
 
       <div>
         <label>Filter by Year</label>
         <Select
+          isClearable
           value={selectedYear}
           options={filtersByYearOptions}
-          onChange={(e) => setFilters({ year: e?.value || undefined })}
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          onChange={(e) => setFilters({ year: e?.value || null })}
+          placeholder={placeholderSelectText}
         />
       </div>
 
       <div>
         <label>Filter by Market</label>
         <Select
+          isClearable
           value={selectedMarket}
           options={filtersByMarketOptions}
-          onChange={(e) => setFilters({ market: e?.value || undefined })}
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          onChange={(e) => setFilters({ market: e?.value || null })}
+          placeholder={placeholderSelectText}
         />
       </div>
 
       <div>
         <label>Filter by Channel</label>
         <Select
+          isClearable
           value={selectedChannel}
           options={filtersByChannelOptions}
-          onChange={(e) => setFilters({ channel: e?.value || undefined })}
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          onChange={(e) => setFilters({ channel: e?.value || null })}
+          placeholder={placeholderSelectText}
         />
       </div>
 
       <div>
         <label>Filter by Device</label>
         <Select
+          isClearable
           value={selectedDevice}
           options={filtersByDeviceOptions}
-          onChange={(e) => setFilters({ device: e?.value || undefined })}
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          onChange={(e) => setFilters({ device: e?.value || null })}
+          placeholder={placeholderSelectText}
         />
       </div>
 
       <div>
         <label>Filter by Data</label>
         <Select
+          isClearable
           value={selectedData}
           options={filtersByDataOptions}
-          onChange={(e) => setFilters({ data: e?.value || undefined })}
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          onChange={(e) => setFilters({ data: e?.value || null })}
+          placeholder={placeholderSelectText}
         />
       </div>
 
       <div>
         <label>Filter by BYOD</label>
         <Select
+          isClearable
           value={selectedByod}
           options={filtersByByodOptions}
-          onChange={(e) => setFilters({ byod: e?.value || undefined })}
+          menuPortalTarget={document.body}
+          menuPosition="fixed"
+          onChange={(e) => setFilters({ byod: e?.value || null })}
+          placeholder={placeholderSelectText}
         />
       </div>
     </div>

@@ -7,13 +7,15 @@ import { generateDateLabels, getDateWithOffset, formatDate } from "./utils";
 // Register the custom scale and plugins
 Chart.register(...registerables, zoomPlugin);
 
-const FanChartWithRestrictions = ({
+const FanChartSingleModel = ({
+  label = "Model X",
+  labelBold,
   actualData,
   forecastData,
   showZoomCtrls = false,
 }) => {
   const actualDataDaysLength = actualData.data.length - 1;
-  const forecastDataDaysLength = forecastData.ModelA.mean.data.length;
+  const forecastDataDaysLength = forecastData.mean.data.length;
 
   const startDate = getDateWithOffset(-actualDataDaysLength);
   const endDate = getDateWithOffset(+forecastDataDaysLength);
@@ -50,12 +52,12 @@ const FanChartWithRestrictions = ({
         pointBorderWidth: (data) => pointBorderWidthFn(data),
       },
       {
-        label: "Model A - Forecast Mean",
+        label: `${label} - Forecast Mean`,
         data: Array(actualDataDaysLength)
           .fill(null)
           .concat([null])
-          .concat(forecastData.ModelA.mean.data),
-        borderColor: forecastData.ModelA.mean.borderColor,
+          .concat(forecastData.mean.data),
+        borderColor: forecastData.mean.borderColor,
         fill: false,
         borderDash: [5, 5],
         pointRadius: (data) => pointStyleFn(data),
@@ -64,60 +66,24 @@ const FanChartWithRestrictions = ({
         pointBorderWidth: (data) => pointBorderWidthFn(data),
       },
       {
-        label: "Model A - Upper Bound",
+        label: `${label} - Upper Bound`,
         data: Array(actualDataDaysLength)
           .fill(null)
           .concat(lastActualDataPoint)
-          .concat(forecastData.ModelA.upper_bound.data),
-        borderColor: forecastData.ModelA.upper_bound.borderColor,
-        backgroundColor: forecastData.ModelA.backgroundColor,
+          .concat(forecastData.upper_bound.data),
+        borderColor: forecastData.upper_bound.borderColor,
+        backgroundColor: forecastData.backgroundColor,
         fill: "+1",
         pointRadius: 0,
       },
       {
-        label: "Model A - Lower Bound",
+        label: `${label} - Lower Bound`,
         data: Array(actualDataDaysLength)
           .fill(null)
           .concat(lastActualDataPoint)
-          .concat(forecastData.ModelA.lower_bound.data),
-        borderColor: forecastData.ModelA.lower_bound.borderColor,
-        backgroundColor: forecastData.ModelA.lower_bound.backgroundColor,
-        fill: "-1",
-        pointRadius: 0,
-      },
-      {
-        label: "Model B - Forecast Mean",
-        data: Array(actualDataDaysLength)
-          .fill(null)
-          .concat([null])
-          .concat(forecastData.ModelB.mean.data),
-        borderColor: forecastData.ModelB.mean.borderColor,
-        fill: false,
-        borderDash: [5, 5],
-        pointRadius: (data) => pointStyleFn(data),
-        pointBackgroundColor: (data) => pointBackgroundColorFn(data),
-        pointBorderColor: (data) => pointBorderColorFn(data),
-        pointBorderWidth: (data) => pointBorderWidthFn(data),
-      },
-      {
-        label: "Model B - Upper Bound",
-        data: Array(actualDataDaysLength)
-          .fill(null)
-          .concat(lastActualDataPoint)
-          .concat(forecastData.ModelB.upper_bound.data),
-        borderColor: forecastData.ModelB.upper_bound.borderColor,
-        backgroundColor: forecastData.ModelB.upper_bound.backgroundColor,
-        fill: "+1",
-        pointRadius: 0,
-      },
-      {
-        label: "Model B - Lower Bound",
-        data: Array(actualDataDaysLength)
-          .fill(null)
-          .concat(lastActualDataPoint)
-          .concat(forecastData.ModelB.lower_bound.data),
-        borderColor: forecastData.ModelB.lower_bound.borderColor,
-        backgroundColor: forecastData.ModelB.lower_bound.backgroundColor,
+          .concat(forecastData.lower_bound.data),
+        borderColor: forecastData.lower_bound.borderColor,
+        backgroundColor: forecastData.lower_bound.backgroundColor,
         fill: "-1",
         pointRadius: 0,
       },
@@ -220,20 +186,13 @@ const FanChartWithRestrictions = ({
               return null; // Disable tooltip for these datasets
             }
             if (tooltipItem.datasetIndex === 0) {
-              return `𝗠𝗼𝗱𝗲𝗹 𝗔\nMTD - 550\n\n𝗠𝗼𝗱𝗲𝗹 𝗕\nMTD - 500`;
+              return `${labelBold}\nMTD - 500`;
             } else if (tooltipItem.datasetIndex === 1) {
-              let result = "𝗠𝗼𝗱𝗲𝗹 𝗔";
+              let result = `${labelBold}`;
               if (tooltipItem.datasetIndex === 1) {
                 result += `\nForecast - ${tooltipItem.parsed.y}`;
               }
               result += "\nMTD - 550";
-              return result;
-            } else if (tooltipItem.datasetIndex === 4) {
-              let result = "\n𝗠𝗼𝗱𝗲𝗹 𝗕";
-              if (tooltipItem.datasetIndex === 4) {
-                result += `\nForecast - ${tooltipItem.parsed.y}`;
-              }
-              result += "\nMTD - 500";
               return result;
             }
             return "";
@@ -297,4 +256,4 @@ const FanChartWithRestrictions = ({
   );
 };
 
-export default FanChartWithRestrictions;
+export default FanChartSingleModel;

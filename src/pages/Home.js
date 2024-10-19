@@ -24,6 +24,7 @@ import {
 import NestedColumnTable from "../components/charts_and_tables/NestedColumnTable";
 import DailyForecastFilters from "../components/filters/DailyForecastFilters";
 import CustomAccordion from "../components/filters/CustomAccordion";
+import FanChartSingleModel from "../components/charts_and_tables/FanChartSingleModel";
 
 // import Sidebar from '../components/Sidebar'
 
@@ -56,14 +57,37 @@ const Home = () => {
       {/* <FanChart/> */}
       {/* <FanChartB/> */}
 
-      <div ref={containerRef} style={{ display: "block" }}>
-        <CustomAccordion title={"Additional Filters"}>
-          <DailyForecastFilters />
-        </CustomAccordion>
+      <div ref={containerRef} style={{ display: "block", width: "100%" }}>
+        <div style={{ width: "100%", background: "white" }}>
+          <CustomAccordion
+            title={
+              <span style={{ fontWeight: "200", fontSize: "1.3rem" }}>
+                Additional Filters
+              </span>
+            }
+          >
+            <DailyForecastFilters />
+          </CustomAccordion>
+        </div>
+
         <br />
         <FanChartWithRestrictions
           actualData={linechartActualData}
           forecastData={linechartForecastData}
+        />
+        <br />
+        <FanChartSingleModel
+          label="Modal A"
+          labelBold="𝗠𝗼𝗱𝗲𝗹 𝗔"
+          actualData={linechartActualData}
+          forecastData={linechartForecastData.ModelA}
+        />
+        <br />
+        <FanChartSingleModel
+          label="Modal B"
+          labelBold="𝗠𝗼𝗱𝗲𝗹 𝗕"
+          actualData={linechartActualData}
+          forecastData={linechartForecastData.ModelB}
         />
         <br />
         <SimpleTable
