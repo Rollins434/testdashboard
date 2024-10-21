@@ -7,8 +7,6 @@ import { format } from "date-fns";
 // Register all components
 Chart.register(...registerables, zoomPlugin);
 
-
-
 const FanChartC = () => {
   // Define start and end dates
   const startDate = new Date("2024-10-05");
@@ -50,7 +48,7 @@ const FanChartC = () => {
           unit: "day",
         },
         // min: startDate.getTime(),
-        // max: endDate.getTime(), 
+        // max: endDate.getTime(),
         ticks: {
           callback: (value) => {
             const date = new Date(value);

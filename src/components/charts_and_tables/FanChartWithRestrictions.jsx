@@ -11,15 +11,16 @@ const FanChartWithRestrictions = ({
   actualData,
   forecastData,
   showZoomCtrls = false,
+  chartOptions,
 }) => {
   const actualDataDaysLength = actualData.data.length - 1;
   const forecastDataDaysLength = forecastData.ModelA.mean.data.length;
 
   const startDate = getDateWithOffset(-actualDataDaysLength);
   const endDate = getDateWithOffset(+forecastDataDaysLength);
-  const dateLabels = generateDateLabels(startDate, endDate);
+  const dateLabels = generateDateLabels(startDate, endDate).map((item) => item);
 
-  const today = new Date();
+  console.log(dateLabels);
   const lastActualDataPoint = actualData.data.at(-1);
   const startDay = 4;
 
@@ -124,127 +125,129 @@ const FanChartWithRestrictions = ({
     ],
   };
 
-  const chartOptions = {
-    scales: {
-      y: {
-        // type: 'logarithmic',
-        beginAtZero: true,
-        min: 0,
-        max: 200, // Set maximum value for y-axis
-        ticks: {
-          // stepSize: 10,
-          precision: 1,
-          callback: function (value) {
-            if (value >= 1000) {
-              return Math.round(value / 1000, 1) + "K";
-            }
-            return Math.round(value, 1);
-          },
-        },
-      },
-      x: {
-        min: 0, // Set minimum value for x-axis
-        offset: false,
-      },
-    },
-    plugins: {
-      zoom: {
-        zoom: {
-          wheel: {
-            enabled: true, // Enable zooming with mouse wheel
-          },
-          pinch: {
-            enabled: true, // Enable pinch-to-zoom on touch devices
-          },
-          mode: "xy", // Allow zooming in both directions
-          // onZoomComplete: function ({ chart }) {
-          //   chart.update(); // Update chart after zoom to apply formatting
-          // },
-        },
-        pan: {
-          enabled: true, // Enable panning
-          mode: "xy", // Allow panning in both directions
-        },
-        limits: {
-          x: { min: 0, max: 30 }, // Set limits for the x-axis
-          y: { min: 0, max: 200 }, // Set limits for the y-axis
-          // y: { min: 0, max: 1_000_000 }, // Set limits for the y-axis
-        },
-      },
-      tooltip: {
-        mode: "index",
-        intersect: false,
-        yAlign: "bottom",
-        displayColors: false,
-        backgroundColor: "rgba(255,255,255,1)",
-        titleColor: "rgba(0,0,0,1)",
-        bodyColor: "rgba(0,0,0,1)",
-        footerColor: "rgba(0,0,0,1)",
-        borderWidth: 2,
-        borderColor: "rgba(100,100,100,0.15)",
-        titleMarginBottom: 0,
+  // const chartOptions = {
+  //   scales: {
+  //     y: {
+  //       // type: 'logarithmic',
+  //       beginAtZero: true,
+  //       min: 0,
+  //       max: 200, // Set maximum value for y-axis
+  //       ticks: {
+  //         // stepSize: 10,
+  //         precision: 1,
+  //         callback: function (value) {
+  //           if (value >= 1_000_000) {
+  //             return Math.round(value / 1_000_000, 1) + "M";
+  //           } else if (value >= 1000) {
+  //             return Math.round(value / 1000, 1) + "K";
+  //           }
+  //           return Math.round(value, 1);
+  //         },
+  //       },
+  //     },
+  //     x: {
+  //       min: 0, // Set minimum value for x-axis
+  //       offset: false,
+  //     },
+  //   },
+  //   plugins: {
+  //     zoom: {
+  //       zoom: {
+  //         wheel: {
+  //           enabled: true, // Enable zooming with mouse wheel
+  //         },
+  //         pinch: {
+  //           enabled: true, // Enable pinch-to-zoom on touch devices
+  //         },
+  //         mode: "xy", // Allow zooming in both directions
+  //         // onZoomComplete: function ({ chart }) {
+  //         //   chart.update(); // Update chart after zoom to apply formatting
+  //         // },
+  //       },
+  //       pan: {
+  //         enabled: true, // Enable panning
+  //         mode: "xy", // Allow panning in both directions
+  //       },
+  //       limits: {
+  //         // x: { min: 0, max: 30 }, // Set limits for the x-axis
+  //         y: { min: -1_000_000, max: 1_000_000 }, // Set limits for the y-axis
+  //         // y: { min: 0, max: 1_000_000 }, // Set limits for the y-axis
+  //       },
+  //     },
+  //     tooltip: {
+  //       mode: "index",
+  //       intersect: false,
+  //       yAlign: "bottom",
+  //       displayColors: false,
+  //       backgroundColor: "rgba(255,255,255,1)",
+  //       titleColor: "rgba(0,0,0,1)",
+  //       bodyColor: "rgba(0,0,0,1)",
+  //       footerColor: "rgba(0,0,0,1)",
+  //       borderWidth: 2,
+  //       borderColor: "rgba(100,100,100,0.15)",
+  //       titleMarginBottom: 0,
 
-        filter: function (tooltipItem) {
-          return [0, 1, 4].includes(tooltipItem.datasetIndex);
-        },
+  //       filter: function (tooltipItem) {
+  //         return [0, 1, 4].includes(tooltipItem.datasetIndex);
+  //       },
 
-        callbacks: {
-          beforeTitle: (value) => {
-            if (value.length === 0) {
-              return;
-            }
-            const tooltipItem = value[0];
-            const datasetLabel = tooltipItem.dataset.label;
-            if (
-              datasetLabel.includes("Upper Bound") ||
-              datasetLabel.includes("Lower Bound")
-            ) {
-              return null; // Disable tooltip for these datasets
-            }
-            if (value && value.length > 0) {
-              const date_0 = value[0].label;
-              const date_1 = formatDate(date_0);
-              return `${date_1}`;
-            }
-            return null;
-          },
-          title: (value) => {
-            return " ";
-          },
-          beforeLabel: (tooltipItem) => {
-            const datasetLabel = tooltipItem.dataset.label;
-            if (
-              datasetLabel.includes("Upper Bound") ||
-              datasetLabel.includes("Lower Bound")
-            ) {
-              return null; // Disable tooltip for these datasets
-            }
-            if (tooltipItem.datasetIndex === 0) {
-              return `𝗠𝗼𝗱𝗲𝗹 𝗔\nMTD - 550\n\n𝗠𝗼𝗱𝗲𝗹 𝗕\nMTD - 500`;
-            } else if (tooltipItem.datasetIndex === 1) {
-              let result = "𝗠𝗼𝗱𝗲𝗹 𝗔";
-              if (tooltipItem.datasetIndex === 1) {
-                result += `\nForecast - ${tooltipItem.parsed.y}`;
-              }
-              result += "\nMTD - 550";
-              return result;
-            } else if (tooltipItem.datasetIndex === 4) {
-              let result = "\n𝗠𝗼𝗱𝗲𝗹 𝗕";
-              if (tooltipItem.datasetIndex === 4) {
-                result += `\nForecast - ${tooltipItem.parsed.y}`;
-              }
-              result += "\nMTD - 500";
-              return result;
-            }
-            return "";
-          },
-          label: (value) => {
-            return "";
-          },
-        },
-      },
-    },
-  };
+  //       callbacks: {
+  //         beforeTitle: (value) => {
+  //           if (value.length === 0) {
+  //             return;
+  //           }
+  //           const tooltipItem = value[0];
+  //           const datasetLabel = tooltipItem.dataset.label;
+  //           if (
+  //             datasetLabel.includes("Upper Bound") ||
+  //             datasetLabel.includes("Lower Bound")
+  //           ) {
+  //             return null; // Disable tooltip for these datasets
+  //           }
+  //           if (value && value.length > 0) {
+  //             const date_0 = value[0].label;
+  //             const date_1 = formatDate(date_0);
+  //             return `${date_1}`;
+  //           }
+  //           return null;
+  //         },
+  //         title: (value) => {
+  //           return " ";
+  //         },
+  //         beforeLabel: (tooltipItem) => {
+  //           const datasetLabel = tooltipItem.dataset.label;
+  //           if (
+  //             datasetLabel.includes("Upper Bound") ||
+  //             datasetLabel.includes("Lower Bound")
+  //           ) {
+  //             return null; // Disable tooltip for these datasets
+  //           }
+  //           if (tooltipItem.datasetIndex === 0) {
+  //             return `𝗠𝗼𝗱𝗲𝗹 𝗔\nMTD - 550\n\n𝗠𝗼𝗱𝗲𝗹 𝗕\nMTD - 500`;
+  //           } else if (tooltipItem.datasetIndex === 1) {
+  //             let result = "𝗠𝗼𝗱𝗲𝗹 𝗔";
+  //             if (tooltipItem.datasetIndex === 1) {
+  //               result += `\nForecast - ${tooltipItem.parsed.y}`;
+  //             }
+  //             result += "\nMTD - 550";
+  //             return result;
+  //           } else if (tooltipItem.datasetIndex === 4) {
+  //             let result = "\n𝗠𝗼𝗱𝗲𝗹 𝗕";
+  //             if (tooltipItem.datasetIndex === 4) {
+  //               result += `\nForecast - ${tooltipItem.parsed.y}`;
+  //             }
+  //             result += "\nMTD - 500";
+  //             return result;
+  //           }
+  //           return "";
+  //         },
+  //         label: (value) => {
+  //           return "";
+  //         },
+  //       },
+  //     },
+  //   },
+  // };
 
   const chartRef = useRef(null);
   function resetZoom() {
@@ -266,8 +269,6 @@ const FanChartWithRestrictions = ({
   return (
     <div
       style={{
-        width: "800px",
-        height: "500px",
         background: "white",
         position: "relative",
       }}

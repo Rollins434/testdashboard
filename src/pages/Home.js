@@ -25,6 +25,9 @@ import NestedColumnTable from "../components/charts_and_tables/NestedColumnTable
 import DailyForecastFilters from "../components/filters/DailyForecastFilters";
 import CustomAccordion from "../components/filters/CustomAccordion";
 import FanChartSingleModel from "../components/charts_and_tables/FanChartSingleModel";
+import DataChartMain from "../components/charts_and_tables/DataChartMain";
+import { forecast_data } from "../components/charts_and_tables/forecast_data2";
+import FanChartMain from "../components/charts_and_tables/FanChartMain";
 
 // import Sidebar from '../components/Sidebar'
 
@@ -58,6 +61,7 @@ const Home = () => {
       {/* <FanChartB/> */}
 
       <div ref={containerRef} style={{ display: "block", width: "100%" }}>
+        <FanChartMain chartData={forecast_data} />
         <div style={{ width: "100%", background: "white" }}>
           <CustomAccordion
             title={
@@ -69,9 +73,8 @@ const Home = () => {
             <DailyForecastFilters />
           </CustomAccordion>
         </div>
-
         <br />
-        <FanChartWithRestrictions
+        {/* <FanChartWithRestrictions
           actualData={linechartActualData}
           forecastData={linechartForecastData}
         />
@@ -137,7 +140,7 @@ const Home = () => {
           data={dailyForecastData}
           columns={dailyForecastDataColumns}
           showPagination
-        />
+        /> */}
       </div>
 
       {/* in below chart i am trying to get date limit done */}
