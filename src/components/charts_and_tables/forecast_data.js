@@ -466,228 +466,237 @@ export const forecastModelComparisonData = [
 //   "Sep-24_Percentage": number;
 // };
 
-export const templateTableDataColumns = [
-  {
-    header: " ", // Space character to Hide Header name
-    columns: [
-      {
-        header: "Channel",
-        accessorKey: "channel",
-      },
-    ],
-  },
-  {
-    header: "Model C Latest Forecast",
-    columns: [
-      {
-        header: "Jul-24",
-        accessorKey: "Jul-24",
-      },
-      {
-        header: "Aug-24",
-        accessorKey: "Aug-24",
-      },
-      {
-        header: "Sep-24",
-        accessorKey: "Sep-24",
-      },
-      {
-        header: "Q3-2024",
-        accessorKey: "Q3-2024",
-      },
-    ],
-  },
+export const createTemplateTableColumns = ({ modelId, month1 = "Jul-24", month2 = "Aug-24", month3 = "Sep-24", quarter = "Q3-2024" }) => {
+  return [
+    {
+      header: " ", // Space character to Hide Header name
+      columns: [
+        {
+          header: "Channel",
+          accessorKey: "channel",
+        },
+      ],
+    },
+    {
+      header: `Model ${modelId} Latest Forecast`,
+      columns: [
+        {
+          header: `${month1}`,
+          accessorKey: `month1`,
+        },
+        {
+          header: `${month2}`,
+          accessorKey: `month2`,
+        },
+        {
+          header: `${month3}`,
+          accessorKey: `month3`,
+        },
+        {
+          header: `${quarter}`,
+          accessorKey: `quarter`,
+        },
+      ],
+    },
 
-  {
-    header: " ", // Space character to Hide Header name
-  },
+    {
+      header: " ", // Space character to Hide Header name
+    },
 
-  {
-    header: "Model C Week 1 Forecast",
-    columns: [
-      {
-        header: "Jul-24",
-        accessorKey: "Jul-24_2",
-      },
-      {
-        header: "Aug-24",
-        accessorKey: "Aug-24_2",
-      },
-      {
-        header: "Sep-24",
-        accessorKey: "Sep-24_2",
-      },
-      {
-        header: "Q3-2024",
-        accessorKey: "Q3-2024_2",
-      },
-    ],
-  },
+    {
+      header: `Model ${modelId} Week 1 Forecast`,
+      columns: [
+        {
+          header: `${month1}`,
+          accessorKey: `month1_2`,
+        },
+        {
+          header: `${month2}`,
+          accessorKey: `month2_2`,
+        },
+        {
+          header: `${month3}`,
+          accessorKey: `month3_2`,
+        },
+        {
+          header: `${quarter}`,
+          accessorKey: `quarter2`,
+        },
+      ],
+    },
 
-  {
-    header: " ", // Using this header for displaying a GAP
-  },
+    {
+      header: " ", // Using this header for displaying a GAP
+    },
 
-  {
-    header: "Model C Week 1 Accuracy",
-    columns: [
-      {
-        header: "Sep-24\n(Actuals MTD)",
-        accessorKey: "Sep-24_3",
-      },
-      {
-        header: "Sep-24\n(Forecast MTD)",
-        accessorKey: "Sep-24_4",
-      },
-      {
-        header: "Sep-24\n(Accuracy %)",
-        accessorKey: "Sep-24_Percentage",
-        cell: (info) => info.getValue() + "%",
-      },
-    ],
-  },
-];
+    {
+      header: `Model ${modelId} Week 1 Accuracy`,
+      columns: [
+        {
+          header: `${month3}\n(Actuals MTD)`,
+          accessorKey: `month3_actuals`,
+        },
+        {
+          header: `${month3}\n(Forecast MTD)`,
+          accessorKey: `month3_forecast`,
+        },
+        {
+          header: `${month3}\n(Accuracy %)`,
+          accessorKey: `month3_accuracy`,
+          cell: (info) => info.getValue() + "%",
+        },
+      ],
+    },
+  ];
+};
+export const templateTableDataColumns = createTemplateTableColumns({
+  modelId: "A",
+  month1: "Jan-24",
+  month2: "Feb-24",
+  month3: "Mar-24",
+  quarter: "Q1-2024",
+});
 
 export const templateTableData = [
   {
     channel: "Disconnects",
-    "Jul-24": 6570,
-    "Aug-24": 6654,
-    "Sep-24": 6758,
-    "Q3-2024": 19982,
-    "Jul-24_2": 6740,
-    "Aug-24_2": 6645,
-    "Sep-24_2": 6666,
-    "Q3-2024_2": 20051,
-    "Sep-24_3": 3262,
-    "Sep-24_4": 3353,
-    "Sep-24_Percentage": 102.79,
+    month1: 6570,
+    month2: 6654,
+    month3: 6758,
+    quarter: 19982,
+    month1_2: 6740,
+    month2_2: 6645,
+    month3_2: 6666,
+    quarter2: 20051,
+    month3_actuals: 3262,
+    month3_forecast: 3353,
+    month3_accuracy: 102.79,
   },
   {
     channel: "CSO Managed",
-    "Jul-24": 3313,
-    "Aug-24": 3350,
-    "Sep-24": 3435,
-    "Q3-2024": 10098,
-    "Jul-24_2": 3392,
-    "Aug-24_2": 3163,
-    "Sep-24_2": 3328,
-    "Q3-2024_2": 9883,
-    "Sep-24_3": 1635,
-    "Sep-24_4": 1748,
-    "Sep-24_Percentage": 106.91,
+    month1: 3313,
+    month2: 3350,
+    month3: 3435,
+    quarter: 10098,
+    month1_2: 3392,
+    month2_2: 3163,
+    month3_2: 3328,
+    quarter2: 9883,
+    month3_actuals: 1635,
+    month3_forecast: 1748,
+    month3_accuracy: 106.91,
   },
   {
     channel: "Stores",
-    "Jul-24": 1135,
-    "Aug-24": 1038,
-    "Sep-24": 1155,
-    "Q3-2024": 3328,
-    "Jul-24_2": 1095,
-    "Aug-24_2": 1021,
-    "Sep-24_2": 1171,
-    "Q3-2024_2": 3287,
-    "Sep-24_3": 541,
-    "Sep-24_4": 591,
-    "Sep-24_Percentage": 109.24,
+    month1: 1135,
+    month2: 1038,
+    month3: 1155,
+    quarter: 3328,
+    month1_2: 1095,
+    month2_2: 1021,
+    month3_2: 1171,
+    quarter2: 3287,
+    month3_actuals: 541,
+    month3_forecast: 591,
+    month3_accuracy: 109.24,
   },
   {
     channel: "Agent",
-    "Jul-24": 1018,
-    "Aug-24": 1168,
-    "Sep-24": 1095,
-    "Q3-2024": 3281,
-    "Jul-24_2": 1102,
-    "Aug-24_2": 1138,
-    "Sep-24_2": 1114,
-    "Q3-2024_2": 3354,
-    "Sep-24_3": 533,
-    "Sep-24_4": 581,
-    "Sep-24_Percentage": 109.01,
+    month1: 1018,
+    month2: 1168,
+    month3: 1095,
+    quarter: 3281,
+    month1_2: 1102,
+    month2_2: 1138,
+    month3_2: 1114,
+    quarter2: 3354,
+    month3_actuals: 533,
+    month3_forecast: 581,
+    month3_accuracy: 109.01,
   },
   {
     channel: "National Retail",
-    "Jul-24": 1160,
-    "Aug-24": 1144,
-    "Sep-24": 1185,
-    "Q3-2024": 3489,
-    "Jul-24_2": 1195,
-    "Aug-24_2": 1004,
-    "Sep-24_2": 1043,
-    "Q3-2024_2": 3242,
-    "Sep-24_3": 561,
-    "Sep-24_4": 576,
-    "Sep-24_Percentage": 102.67,
+    month1: 1160,
+    month2: 1144,
+    month3: 1185,
+    quarter: 3489,
+    month1_2: 1195,
+    month2_2: 1004,
+    month3_2: 1043,
+    quarter2: 3242,
+    month3_actuals: 561,
+    month3_forecast: 576,
+    month3_accuracy: 102.67,
   },
   {
     channel: "CCS Managed",
-    "Jul-24": 2090,
-    "Aug-24": 2223,
-    "Sep-24": 2210,
-    "Q3-2024": 6523,
-    "Jul-24_2": 2227,
-    "Aug-24_2": 2364,
-    "Sep-24_2": 2258,
-    "Q3-2024_2": 6849,
-    "Sep-24_3": 1116,
-    "Sep-24_4": 1049,
-    "Sep-24_Percentage": 94.0,
+    month1: 2090,
+    month2: 2223,
+    month3: 2210,
+    quarter: 6523,
+    month1_2: 2227,
+    month2_2: 2364,
+    month3_2: 2258,
+    quarter2: 6849,
+    month3_actuals: 1116,
+    month3_forecast: 1049,
+    month3_accuracy: 94.0,
   },
   {
     channel: "Inside Sales",
-    "Jul-24": 1082,
-    "Aug-24": 1049,
-    "Sep-24": 1062,
-    "Q3-2024": 3193,
-    "Jul-24_2": 1157,
-    "Aug-24_2": 1182,
-    "Sep-24_2": 1101,
-    "Q3-2024_2": 3440,
-    "Sep-24_3": 597,
-    "Sep-24_4": 528,
-    "Sep-24_Percentage": 88.44,
+    month1: 1082,
+    month2: 1049,
+    month3: 1062,
+    quarter: 3193,
+    month1_2: 1157,
+    month2_2: 1182,
+    month3_2: 1101,
+    quarter2: 3440,
+    month3_actuals: 597,
+    month3_forecast: 528,
+    month3_accuracy: 88.44,
   },
   {
     channel: "CS & Other",
-    "Jul-24": 1008,
-    "Aug-24": 1174,
-    "Sep-24": 1148,
-    "Q3-2024": 3330,
-    "Jul-24_2": 1070,
-    "Aug-24_2": 1182,
-    "Sep-24_2": 1157,
-    "Q3-2024_2": 3409,
-    "Sep-24_3": 519,
-    "Sep-24_4": 521,
-    "Sep-24_Percentage": 100.39,
+    month1: 1008,
+    month2: 1174,
+    month3: 1148,
+    quarter: 3330,
+    month1_2: 1070,
+    month2_2: 1182,
+    month3_2: 1157,
+    quarter2: 3409,
+    month3_actuals: 519,
+    month3_forecast: 521,
+    month3_accuracy: 100.39,
   },
   {
     channel: "CXO Managed",
-    "Jul-24": 1167,
-    "Aug-24": 1081,
-    "Sep-24": 1113,
-    "Q3-2024": 3361,
-    "Jul-24_2": 1121,
-    "Aug-24_2": 1118,
-    "Sep-24_2": 1080,
-    "Q3-2024_2": 3319,
-    "Sep-24_3": 511,
-    "Sep-24_4": 556,
-    "Sep-24_Percentage": 108.81,
+    month1: 1167,
+    month2: 1081,
+    month3: 1113,
+    quarter: 3361,
+    month1_2: 1121,
+    month2_2: 1118,
+    month3_2: 1080,
+    quarter2: 3319,
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
   },
   {
     channel: "Digital",
-    "Jul-24": 1167,
-    "Aug-24": 1081,
-    "Sep-24": 1113,
-    "Q3-2024": 3361,
-    "Jul-24_2": 1121,
-    "Aug-24_2": 1118,
-    "Sep-24_2": 1080,
-    "Q3-2024_2": 3319,
-    "Sep-24_3": 511,
-    "Sep-24_4": 556,
-    "Sep-24_Percentage": 108.81,
+    month1: 1167,
+    month2: 1081,
+    month3: 1113,
+    quarter: 3361,
+    month1_2: 1121,
+    month2_2: 1118,
+    month3_2: 1080,
+    quarter2: 3319,
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
   },
 ];
 
@@ -1290,3 +1299,368 @@ export const dailyForecastData = [
     yoyActuals: null,
   },
 ];
+
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+const raw_templateTableData2 = {
+  quarterly_forecast_results: {
+    STORES: [
+      {
+        totalQuarter: 594916.4293556688,
+      },
+      {
+        April: 194638.0642924254,
+      },
+      {
+        May: 212921.34380652776,
+      },
+      {
+        June: 187357.0212567157,
+      },
+    ],
+    AGENT: [
+      {
+        totalQuarter: 401929.9955195183,
+      },
+      {
+        April: 131464.039288988,
+      },
+      {
+        May: 144237.1354591482,
+      },
+      {
+        June: 126228.82077138212,
+      },
+    ],
+    OUTSIDE: [
+      {
+        totalQuarter: 12379.31223229842,
+      },
+      {
+        April: 4124.475872555703,
+      },
+      {
+        May: 5800.843730685454,
+      },
+      {
+        June: 2453.992629057263,
+      },
+    ],
+    OTHER: [
+      {
+        totalQuarter: 120560.64050634576,
+      },
+      {
+        April: 39718.26351374807,
+      },
+      {
+        May: 43374.92511608996,
+      },
+      {
+        June: 37467.45187650774,
+      },
+    ],
+    TELEMARKETING: [
+      {
+        totalQuarter: 105881.52478793217,
+      },
+      {
+        April: 34692.22796347074,
+      },
+      {
+        May: 38057.57575611369,
+      },
+      {
+        June: 33131.72106834774,
+      },
+    ],
+    INTERNET: [
+      {
+        totalQuarter: 243415.32214771077,
+      },
+      {
+        April: 79054.74524966542,
+      },
+      {
+        May: 86220.38293085972,
+      },
+      {
+        June: 78140.19396718562,
+      },
+    ],
+    "NATIONAL RETAIL": [
+      {
+        totalQuarter: 75707.03107976935,
+      },
+      {
+        April: 25000.79060038919,
+      },
+      {
+        May: 28562.032928458244,
+      },
+      {
+        June: 22144.207550921918,
+      },
+    ],
+  },
+};
+
+const templateTableData2_CSOmanagedGroup = [
+  {
+    channel: "Stores",
+
+    year: "2024",
+    init_quarter: 1 || 2 || 3 || 4,
+    init_month: "April",
+
+    month1: raw_templateTableData2.quarterly_forecast_results["STORES"][1].April.toFixed(),
+    month2: raw_templateTableData2.quarterly_forecast_results["STORES"][2].May.toFixed(),
+    month3: raw_templateTableData2.quarterly_forecast_results["STORES"][3].June.toFixed(),
+
+    quarter: raw_templateTableData2.quarterly_forecast_results["STORES"][0].totalQuarter.toFixed(),
+    month1_2: raw_templateTableData2.quarterly_forecast_results["STORES"][1].April.toFixed(),
+    month2_2: raw_templateTableData2.quarterly_forecast_results["STORES"][2].May.toFixed(),
+    month3_2: raw_templateTableData2.quarterly_forecast_results["STORES"][3].June.toFixed(),
+    quarter2: raw_templateTableData2.quarterly_forecast_results["STORES"][0].totalQuarter.toFixed(),
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
+  },
+  {
+    channel: "Agent",
+    month1: raw_templateTableData2.quarterly_forecast_results["AGENT"][1].April.toFixed(),
+    month2: raw_templateTableData2.quarterly_forecast_results["AGENT"][2].May.toFixed(),
+    month3: raw_templateTableData2.quarterly_forecast_results["AGENT"][3].June.toFixed(),
+    quarter: raw_templateTableData2.quarterly_forecast_results["AGENT"][0].totalQuarter.toFixed(),
+    month1_2: raw_templateTableData2.quarterly_forecast_results["AGENT"][1].April.toFixed(),
+    month2_2: raw_templateTableData2.quarterly_forecast_results["AGENT"][2].May.toFixed(),
+    month3_2: raw_templateTableData2.quarterly_forecast_results["AGENT"][3].June.toFixed(),
+    quarter2: raw_templateTableData2.quarterly_forecast_results["AGENT"][0].totalQuarter.toFixed(),
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
+  },
+  {
+    channel: "National Retail",
+    month1: raw_templateTableData2.quarterly_forecast_results["NATIONAL RETAIL"][1].April.toFixed(),
+    month2: raw_templateTableData2.quarterly_forecast_results["NATIONAL RETAIL"][2].May.toFixed(),
+    month3: raw_templateTableData2.quarterly_forecast_results["NATIONAL RETAIL"][3].June.toFixed(),
+    quarter: raw_templateTableData2.quarterly_forecast_results["NATIONAL RETAIL"][0].totalQuarter.toFixed(),
+    month1_2: raw_templateTableData2.quarterly_forecast_results["NATIONAL RETAIL"][1].April.toFixed(),
+    month2_2: raw_templateTableData2.quarterly_forecast_results["NATIONAL RETAIL"][2].May.toFixed(),
+    month3_2: raw_templateTableData2.quarterly_forecast_results["NATIONAL RETAIL"][3].June.toFixed(),
+    quarter2: raw_templateTableData2.quarterly_forecast_results["NATIONAL RETAIL"][0].totalQuarter.toFixed(),
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
+  },
+];
+
+const templateTableData2_CCSmanagedGroup = [
+  {
+    channel: "Outside",
+    month1: raw_templateTableData2.quarterly_forecast_results["OUTSIDE"][1].April.toFixed(),
+    month2: raw_templateTableData2.quarterly_forecast_results["OUTSIDE"][2].May.toFixed(),
+    month3: raw_templateTableData2.quarterly_forecast_results["OUTSIDE"][3].June.toFixed(),
+    quarter: raw_templateTableData2.quarterly_forecast_results["OUTSIDE"][0].totalQuarter.toFixed(),
+    month1_2: raw_templateTableData2.quarterly_forecast_results["OUTSIDE"][1].April.toFixed(),
+    month2_2: raw_templateTableData2.quarterly_forecast_results["OUTSIDE"][2].May.toFixed(),
+    month3_2: raw_templateTableData2.quarterly_forecast_results["OUTSIDE"][3].June.toFixed(),
+    quarter2: raw_templateTableData2.quarterly_forecast_results["OUTSIDE"][0].totalQuarter.toFixed(),
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
+  },
+  {
+    channel: "Other",
+    month1: raw_templateTableData2.quarterly_forecast_results["OTHER"][1].April.toFixed(),
+    month2: raw_templateTableData2.quarterly_forecast_results["OTHER"][2].May.toFixed(),
+    month3: raw_templateTableData2.quarterly_forecast_results["OTHER"][3].June.toFixed(),
+    quarter: raw_templateTableData2.quarterly_forecast_results["OTHER"][0].totalQuarter.toFixed(),
+    month1_2: raw_templateTableData2.quarterly_forecast_results["OTHER"][1].April.toFixed(),
+    month2_2: raw_templateTableData2.quarterly_forecast_results["OTHER"][2].May.toFixed(),
+    month3_2: raw_templateTableData2.quarterly_forecast_results["OTHER"][3].June.toFixed(),
+    quarter2: raw_templateTableData2.quarterly_forecast_results["OTHER"][0].totalQuarter.toFixed(),
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
+  },
+];
+const templateTableData2_CXOmanagedGroup = [
+  {
+    channel: "Telemarketing",
+    month1: raw_templateTableData2.quarterly_forecast_results["TELEMARKETING"][1].April.toFixed(),
+    month2: raw_templateTableData2.quarterly_forecast_results["TELEMARKETING"][2].May.toFixed(),
+    month3: raw_templateTableData2.quarterly_forecast_results["TELEMARKETING"][3].June.toFixed(),
+    quarter: raw_templateTableData2.quarterly_forecast_results["TELEMARKETING"][0].totalQuarter.toFixed(),
+    month1_2: raw_templateTableData2.quarterly_forecast_results["TELEMARKETING"][1].April.toFixed(),
+    month2_2: raw_templateTableData2.quarterly_forecast_results["TELEMARKETING"][2].May.toFixed(),
+    month3_2: raw_templateTableData2.quarterly_forecast_results["TELEMARKETING"][3].June.toFixed(),
+    quarter2: raw_templateTableData2.quarterly_forecast_results["TELEMARKETING"][0].totalQuarter.toFixed(),
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
+  },
+  {
+    channel: "Internet",
+    month1: raw_templateTableData2.quarterly_forecast_results["INTERNET"][1].April.toFixed(),
+    month2: raw_templateTableData2.quarterly_forecast_results["INTERNET"][2].May.toFixed(),
+    month3: raw_templateTableData2.quarterly_forecast_results["INTERNET"][3].June.toFixed(),
+    quarter: raw_templateTableData2.quarterly_forecast_results["INTERNET"][0].totalQuarter.toFixed(),
+    month1_2: raw_templateTableData2.quarterly_forecast_results["INTERNET"][1].April.toFixed(),
+    month2_2: raw_templateTableData2.quarterly_forecast_results["INTERNET"][2].May.toFixed(),
+    month3_2: raw_templateTableData2.quarterly_forecast_results["INTERNET"][2].May.toFixed(),
+    quarter2: raw_templateTableData2.quarterly_forecast_results["INTERNET"][0].totalQuarter.toFixed(),
+    month3_actuals: 511,
+    month3_forecast: 556,
+    month3_accuracy: 108.81,
+  },
+];
+
+const templateTableData2_CSOmanaged = templateTableData2_CSOmanagedGroup.reduce(
+  (acc, curr) => {
+    return {
+      channel: "CSO Managed",
+      month1: acc.month1 + +curr.month1,
+      month2: acc.month2 + +curr.month2,
+      month3: acc.month3 + +curr.month3,
+      quarter: acc.quarter + +curr.quarter,
+      month1_2: acc.month1_2 + +curr.month1_2,
+      month2_2: acc.month2_2 + +curr.month2_2,
+      month3_2: acc.month3_2 + +curr.month3_2,
+      quarter2: acc.quarter2 + +curr.quarter2,
+      month3_actuals: acc.month3_actuals + +curr.month3_actuals,
+      month3_forecast: acc.month3_forecast + +curr.month3_forecast,
+      month3_accuracy: acc.month3_accuracy + +curr.month3_accuracy,
+    };
+  },
+  {
+    channel: "CSO Managed",
+    month1: 0,
+    month2: 0,
+    month3: 0,
+    quarter: 0,
+    month1_2: 0,
+    month2_2: 0,
+    month3_2: 0,
+    quarter2: 0,
+    month3_actuals: 0,
+    month3_forecast: 0,
+    month3_accuracy: 0,
+  }
+);
+const templateTableData2_CCSmanaged = templateTableData2_CCSmanagedGroup.reduce(
+  (acc, curr) => {
+    return {
+      channel: "CCS Managed",
+      month1: acc.month1 + +curr.month1,
+      month2: acc.month2 + +curr.month2,
+      month3: acc.month3 + +curr.month3,
+      quarter: acc.quarter + +curr.quarter,
+      month1_2: acc.month1_2 + +curr.month1_2,
+      month2_2: acc.month2_2 + +curr.month2_2,
+      month3_2: acc.month3_2 + +curr.month3_2,
+      quarter2: acc.quarter2 + +curr.quarter2,
+      month3_actuals: acc.month3_actuals + +curr.month3_actuals,
+      month3_forecast: acc.month3_forecast + +curr.month3_forecast,
+      month3_accuracy: acc.month3_accuracy + +curr.month3_accuracy,
+    };
+  },
+  {
+    channel: "CCS Managed",
+    month1: 0,
+    month2: 0,
+    month3: 0,
+    quarter: 0,
+    month1_2: 0,
+    month2_2: 0,
+    month3_2: 0,
+    quarter2: 0,
+    month3_actuals: 0,
+    month3_forecast: 0,
+    month3_accuracy: 0,
+  }
+);
+const templateTableData2_CXOmanaged = templateTableData2_CXOmanagedGroup.reduce(
+  (acc, curr) => {
+    return {
+      channel: "CXO Managed",
+      month1: acc.month1 + +curr.month1,
+      month2: acc.month2 + +curr.month2,
+      month3: acc.month3 + +curr.month3,
+      quarter: acc.quarter + +curr.quarter,
+      month1_2: acc.month1_2 + +curr.month1_2,
+      month2_2: acc.month2_2 + +curr.month2_2,
+      month3_2: acc.month3_2 + +curr.month3_2,
+      quarter2: acc.quarter2 + +curr.quarter2,
+      month3_actuals: acc.month3_actuals + +curr.month3_actuals,
+      month3_forecast: acc.month3_forecast + +curr.month3_forecast,
+      month3_accuracy: acc.month3_accuracy + +curr.month3_accuracy,
+    };
+  },
+  {
+    channel: "CXO Managed",
+    month1: 0,
+    month2: 0,
+    month3: 0,
+    quarter: 0,
+    month1_2: 0,
+    month2_2: 0,
+    month3_2: 0,
+    quarter2: 0,
+    month3_actuals: 0,
+    month3_forecast: 0,
+    month3_accuracy: 0,
+  }
+);
+
+const templateTableData2_Discounts = [templateTableData2_CSOmanaged, templateTableData2_CCSmanaged, templateTableData2_CXOmanaged].reduce(
+  (acc, curr) => {
+    return {
+      channel: "Discounts",
+      month1: acc.month1 + +curr.month1,
+      month2: acc.month2 + +curr.month2,
+      month3: acc.month3 + +curr.month3,
+      quarter: acc.quarter + +curr.quarter,
+      month1_2: acc.month1_2 + +curr.month1_2,
+      month2_2: acc.month2_2 + +curr.month2_2,
+      month3_2: acc.month3_2 + +curr.month3_2,
+      quarter2: acc.quarter2 + +curr.quarter2,
+      month3_actuals: acc.month3_actuals + +curr.month3_actuals,
+      month3_forecast: acc.month3_forecast + +curr.month3_forecast,
+      month3_accuracy: acc.month3_accuracy + +curr.month3_accuracy,
+    };
+  },
+  {
+    channel: "Discounts",
+    month1: 0,
+    month2: 0,
+    month3: 0,
+    quarter: 0,
+    month1_2: 0,
+    month2_2: 0,
+    month3_2: 0,
+    quarter2: 0,
+    month3_actuals: 0,
+    month3_forecast: 0,
+    month3_accuracy: 0,
+  }
+);
+
+export const templateTableData2 = [templateTableData2_Discounts]
+  .concat([templateTableData2_CSOmanaged])
+  .concat(templateTableData2_CSOmanagedGroup)
+  .concat([templateTableData2_CCSmanaged])
+  .concat(templateTableData2_CCSmanagedGroup)
+  .concat([templateTableData2_CXOmanaged])
+  .concat(templateTableData2_CXOmanagedGroup);
+
+export const templateTableDataColumns2 = createTemplateTableColumns({
+  modelId: "A",
+  month1: "April-24",
+  month2: "May-24",
+  month3: "June-24",
+  quarter: "Q1-2024",
+});

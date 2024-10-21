@@ -4,17 +4,9 @@ import "chartjs-adapter-date-fns";
 import FanChartWithRestrictions from "./FanChartWithRestrictions";
 import FanChartSingleModel from "./FanChartSingleModel";
 import { defaultChartOptions } from "./chartOptions";
-import {
-  defaultXaxisScale,
-  XaxisScale1,
-  XaxisTimeScale,
-  XAxisTimeScaleRangeFn,
-} from "./chartOptions/scales.xaxis";
+import { defaultXaxisScale, XaxisScale1, XaxisTimeScale, XAxisTimeScaleRangeFn } from "./chartOptions/scales.xaxis";
 import { defaultYAxisScale, YAxisScale1 } from "./chartOptions/scales.yaxis";
-import {
-  defaultTooltips,
-  tooltipsTwoModels,
-} from "./chartOptions/tooltips.plugin";
+import { defaultTooltips, tooltipsTwoModels } from "./chartOptions/tooltips.plugin";
 import FanChartSingleModel2 from "./FanChartSingleModel2";
 import { forecast_data } from "./forecast_data2";
 
@@ -35,11 +27,7 @@ function fixForecastValue(value) {
 }
 
 const FanChartMain = ({ chartData }) => {
-  const {
-    previous_month_actuals: raw_actualData,
-    forecasted_data_modelA: raw_modelAData,
-    forecasted_data_modelB: raw_modelBData,
-  } = chartData;
+  const { previous_month_actuals: raw_actualData, forecasted_data_modelA: raw_modelAData, forecasted_data_modelB: raw_modelBData } = chartData;
 
   const linechartActualData = {
     data: raw_actualData.map((item) => item.actuals).map(fixForecastValue),
@@ -49,44 +37,32 @@ const FanChartMain = ({ chartData }) => {
   const linechartForecastData = {
     ModelA: {
       mean: {
-        data: raw_modelAData
-          .map((item) => item.forecast_values)
-          .map(fixForecastValue),
+        data: raw_modelAData.map((item) => item.forecast_values).map(fixForecastValue),
         borderColor: `rgba(${COLORS.BLUE}, 1)`,
       },
       upper_bound: {
-        data: raw_modelAData
-          .map((item) => item.prediction_interval_upper)
-          .map(fixForecastValue),
+        data: raw_modelAData.map((item) => item.prediction_interval_upper).map(fixForecastValue),
         borderColor: `rgba(${COLORS.BLUE}, 0)`,
         backgroundColor: `rgba(${COLORS.BLUE}, 0.1)`,
       },
       lower_bound: {
-        data: raw_modelAData
-          .map((item) => item.prediction_interval_lower)
-          .map(fixForecastValue),
+        data: raw_modelAData.map((item) => item.prediction_interval_lower).map(fixForecastValue),
         borderColor: `rgba(${COLORS.BLUE}, 0)`,
         backgroundColor: `rgba(${COLORS.BLUE}, 0.1)`,
       },
     },
     ModelB: {
       mean: {
-        data: raw_modelBData
-          .map((item) => item.forecast_values)
-          .map(fixForecastValue),
+        data: raw_modelBData.map((item) => item.forecast_values).map(fixForecastValue),
         borderColor: `rgba(${COLORS.GREEN}, 1)`,
       },
       upper_bound: {
-        data: raw_modelBData
-          .map((item) => item.prediction_interval_upper)
-          .map(fixForecastValue),
+        data: raw_modelBData.map((item) => item.prediction_interval_upper).map(fixForecastValue),
         borderColor: `rgba(${COLORS.GREEN}, 0)`,
         backgroundColor: `rgba(${COLORS.GREEN}, 0.1)`,
       },
       lower_bound: {
-        data: raw_modelBData
-          .map((item) => item.prediction_interval_lower)
-          .map(fixForecastValue),
+        data: raw_modelBData.map((item) => item.prediction_interval_lower).map(fixForecastValue),
         borderColor: `rgba(${COLORS.GREEN}, 0)`,
         backgroundColor: `rgba(${COLORS.GREEN}, 0.1)`,
       },
@@ -115,16 +91,8 @@ const FanChartMain = ({ chartData }) => {
           chartOptions={defaultChartOptions({
             scales: {
               x: XAxisTimeScaleRangeFn({
-                minValue: new Date(
-                  forecast_data.previous_month_actuals.at(0).activitydate
-                )
-                  .toISOString()
-                  .split("T")[0],
-                maxValue: new Date(
-                  forecast_data.forecasted_data_modelA.at(-1).activitydate
-                )
-                  .toISOString()
-                  .split("T")[0],
+                minValue: new Date(forecast_data.previous_month_actuals.at(0).activitydate).toISOString().split("T")[0],
+                maxValue: new Date(forecast_data.forecasted_data_modelA.at(-1).activitydate).toISOString().split("T")[0],
               }),
               y: YAxisScale1,
             },
@@ -143,16 +111,8 @@ const FanChartMain = ({ chartData }) => {
                 mode: "xy", // Allow panning in both directions
               },
               limits: {
-                min: new Date(
-                  forecast_data.previous_month_actuals.at(0).activitydate
-                )
-                  .toISOString()
-                  .split("T")[0],
-                max: new Date(
-                  forecast_data.forecasted_data_modelA.at(-1).activitydate
-                )
-                  .toISOString()
-                  .split("T")[0],
+                min: Date.parse(forecast_data.previous_month_actuals.at(0).activitydate) / 1000,
+                max: Date.parse(forecast_data.forecasted_data_modelA.at(-1).activitydate) / 1000,
               },
             },
             tooltipsArgs: defaultTooltips({

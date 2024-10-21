@@ -1,10 +1,4 @@
-import {
-  useReactTable,
-  getCoreRowModel,
-  getPaginationRowModel,
-  flexRender,
-  getSortedRowModel,
-} from "@tanstack/react-table";
+import { useReactTable, getCoreRowModel, getPaginationRowModel, flexRender, getSortedRowModel } from "@tanstack/react-table";
 import { styles } from "./tableStyles";
 import { useState } from "react";
 
@@ -18,14 +12,9 @@ import { useState } from "react";
 //   }
 // }
 
-function NestedColumnTable({
-  datasetName,
-  columns,
-  data,
-  showPagination = false,
-  styleOptions = { rowBackgroundColors: [], rowTextColors: [] },
-}) {
-  const [pageSize, setPageSize] = useState(10);
+function NestedColumnTable({ datasetName, columns, data, defaultPageSize = 10, showPagination = false, styleOptions = { rowBackgroundColors: [], rowTextColors: [] } }) {
+  console.log(data);
+  const [pageSize, setPageSize] = useState(defaultPageSize);
   const [pageIndex, setPageIndex] = useState(0);
   const [sorting, setSorting] = useState([]);
 
@@ -42,10 +31,7 @@ function NestedColumnTable({
     },
     onSortingChange: setSorting,
     onPaginationChange: (updater) => {
-      const newPaginationState =
-        typeof updater === "function"
-          ? updater({ pageIndex, pageSize })
-          : updater;
+      const newPaginationState = typeof updater === "function" ? updater({ pageIndex, pageSize }) : updater;
       setPageIndex(newPaginationState.pageIndex);
       setPageSize(newPaginationState.pageSize);
     },
@@ -65,11 +51,7 @@ function NestedColumnTable({
         <table style={styles.TABLE}>
           <thead style={styles.THEAD}>
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr
-                data-key={"headerGroup-" + headerGroup.id}
-                key={datasetName + "-headerGroup-" + headerGroup.id}
-                style={styles.THEAD_TR}
-              >
+              <tr data-key={"headerGroup-" + headerGroup.id} key={datasetName + "-headerGroup-" + headerGroup.id} style={styles.THEAD_TR}>
                 {headerGroup.headers.map((header) => (
                   <th
                     data-key={"header-" + header.index}
@@ -77,21 +59,11 @@ function NestedColumnTable({
                     style={{
                       ...styles.THEAD_TR_TH,
                       textAlign: header.colSpan > 1 ? "center" : "left",
-                      borderBottomColor:
-                        headerGroup.id === "0" &&
-                        flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        ) == " "
-                          ? "white"
-                          : "black",
+                      borderBottomColor: headerGroup.id === "0" && flexRender(header.column.columnDef.header, header.getContext()) == " " ? "white" : "black",
                     }}
                     colSpan={header.colSpan} // Ensure colSpan is applied
                   >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
+                    {flexRender(header.column.columnDef.header, header.getContext())}
                   </th>
                 ))}
               </tr>
@@ -103,26 +75,12 @@ function NestedColumnTable({
                 key={datasetName + "-dataRow-" + row.id}
                 style={{
                   ...styles.TBODY_TR,
-                  backgroundColor: styleOptions?.rowBackgroundColors.length
-                    ? styleOptions.rowBackgroundColors[Number(row.id)] ||
-                      "default"
-                    : "default",
-                  color: styleOptions?.rowTextColors
-                    ? styleOptions.rowTextColors[Number(row.id)] || "default"
-                    : "default",
+                  backgroundColor: styleOptions?.rowBackgroundColors.length ? styleOptions.rowBackgroundColors[Number(row.id)] || "default" : "default",
+                  color: styleOptions?.rowTextColors ? styleOptions.rowTextColors[Number(row.id)] || "default" : "default",
                 }}
               >
                 {row.getVisibleCells().map((cell, cellIdx) => (
-                  <td
-                    key={
-                      datasetName +
-                      "-dataRow-" +
-                      row.id +
-                      "-dataCell-" +
-                      cellIdx
-                    }
-                    style={styles.TBODY_TR_TD}
-                  >
+                  <td key={datasetName + "-dataRow-" + row.id + "-dataCell-" + cellIdx} style={styles.TBODY_TR_TD}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
@@ -139,13 +97,7 @@ function NestedColumnTable({
             {/* Rows per page selection */}
             <div>
               <label htmlFor="pageSize">Rows per page:</label>
-              <select
-                id="pageSize"
-                value={pageSize}
-                onChange={handlePageSizeChange}
-                className="pagination_dropdown"
-                style={styles.PAGINATION_DROPDOWN}
-              >
+              <select id="pageSize" value={pageSize} onChange={handlePageSizeChange} className="pagination_dropdown" style={styles.PAGINATION_DROPDOWN}>
                 {[5, 10, 20, 30].map((size) => (
                   <option key={size} value={size}>
                     {size}
@@ -183,10 +135,7 @@ function NestedColumnTable({
                     style={{
                       ...styles.PAGINATION_CTRLS_BTNS,
                       width: "auto",
-                      fontWeight:
-                        table.getState().pagination.pageIndex === page
-                          ? "bold"
-                          : "normal",
+                      fontWeight: table.getState().pagination.pageIndex === page ? "bold" : "normal",
                     }}
                   >
                     {page + 1} {/* Page numbers are 1-based for display */}

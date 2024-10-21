@@ -19,7 +19,9 @@ import {
   linechartActualData,
   linechartForecastData,
   templateTableData,
+  templateTableData2,
   templateTableDataColumns,
+  templateTableDataColumns2,
 } from "../components/charts_and_tables/forecast_data";
 import NestedColumnTable from "../components/charts_and_tables/NestedColumnTable";
 import DailyForecastFilters from "../components/filters/DailyForecastFilters";
@@ -62,7 +64,7 @@ const Home = () => {
 
       <div ref={containerRef} style={{ display: "block", width: "100%" }}>
         <FanChartMain chartData={forecast_data} />
-        <div style={{ width: "100%", background: "white" }}>
+        {/* <div style={{ width: "100%", background: "white" }}>
           <CustomAccordion
             title={
               <span style={{ fontWeight: "200", fontSize: "1.3rem" }}>
@@ -74,7 +76,7 @@ const Home = () => {
           </CustomAccordion>
         </div>
         <br />
-        {/* <FanChartWithRestrictions
+        <FanChartWithRestrictions
           actualData={linechartActualData}
           forecastData={linechartForecastData}
         />
@@ -101,8 +103,8 @@ const Home = () => {
             fixedTableLayout: size > 768 ? true : false,
             wrapHeaders: true,
           }}
-        />
-        <br />
+        /> */}
+        {/* <br />
         <SimpleTable
           datasetName={"forecastModelComparison"}
           columns={forecastModelComparisonColumns}
@@ -132,15 +134,25 @@ const Home = () => {
             ],
             rowTextColors: ["white"],
           }}
-        />
+        /> */}
 
         <br />
-        <NestedColumnTable
+        {/* <NestedColumnTable
           datasetName={"dailyForecast"}
           data={dailyForecastData}
           columns={dailyForecastDataColumns}
           showPagination
         /> */}
+        <NestedColumnTable
+          defaultPageSize={templateTableData2.length}
+          datasetName={"templateTable"}
+          data={templateTableData2}
+          columns={templateTableDataColumns2}
+          styleOptions={{
+            rowBackgroundColors: ["gray", "lightgray", null, null, null, "lightgray", null, null, "lightgray", null],
+            rowTextColors: ["white"],
+          }}
+        />
       </div>
 
       {/* in below chart i am trying to get date limit done */}
