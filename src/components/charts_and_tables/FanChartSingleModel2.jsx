@@ -7,13 +7,7 @@ import { useRef } from "react";
 // Register the custom scale and plugins
 Chart.register(...registerables, zoomPlugin);
 
-const FanChartSingleModel2 = ({
-  label = "Model X",
-  actualData,
-  forecastData,
-  showZoomCtrls = false,
-  chartOptions = {},
-}) => {
+const FanChartSingleModel2 = ({ label = "Model X", actualData, forecastData, showZoomCtrls = false, chartOptions = {} }) => {
   const actualFormattedData = actualData.map((dataPoint) => ({
     x: new Date(dataPoint.activitydate).toISOString().split("T")[0], // Converts to 'YYYY-MM-DD'
     y: dataPoint.actuals,
@@ -51,9 +45,6 @@ const FanChartSingleModel2 = ({
   const pointBorderWidthFn = (data) => {
     return (data.dataIndex + startDay) % 7 === 0 ? 2 : 0;
   };
-
-  console.log(actualFormattedData, forecastFormattedData);
-  console.log(chartOptions);
 
   const chartData = {
     labels: actualData.map((dataPoint) => dataPoint.x),
@@ -111,9 +102,7 @@ const FanChartSingleModel2 = ({
       }}
     >
       <h2>Fan Chart Single Model 2</h2>
-      {showZoomCtrls && (
-        <ZoomControls resetZoom={resetZoom} zoomIn={zoomIn} zoomOut={zoomOut} />
-      )}
+      {showZoomCtrls && <ZoomControls resetZoom={resetZoom} zoomIn={zoomIn} zoomOut={zoomOut} />}
       <Line ref={chartRef} data={chartData} options={chartOptions} />
     </div>
   );

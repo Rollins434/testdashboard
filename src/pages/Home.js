@@ -14,6 +14,7 @@ import {
   dailyForecastDataColumns,
   forecastAccuracyColumns,
   forecastAccuracyData,
+  forecastAccuracyData2,
   forecastModelComparisonColumns,
   forecastModelComparisonData,
   linechartActualData,
@@ -64,19 +65,13 @@ const Home = () => {
 
       <div ref={containerRef} style={{ display: "block", width: "100%" }}>
         <FanChartMain chartData={forecast_data} />
-        {/* <div style={{ width: "100%", background: "white" }}>
-          <CustomAccordion
-            title={
-              <span style={{ fontWeight: "200", fontSize: "1.3rem" }}>
-                Additional Filters
-              </span>
-            }
-          >
+        <div style={{ width: "100%", background: "white" }}>
+          <CustomAccordion title={<span style={{ fontWeight: "200", fontSize: "1.3rem" }}>Additional Filters</span>}>
             <DailyForecastFilters />
           </CustomAccordion>
         </div>
         <br />
-        <FanChartWithRestrictions
+        {/* <FanChartWithRestrictions
           actualData={linechartActualData}
           forecastData={linechartForecastData}
         />
@@ -94,16 +89,16 @@ const Home = () => {
           actualData={linechartActualData}
           forecastData={linechartForecastData.ModelB}
         />
-        <br />
+        <br /> */}
         <SimpleTable
           datasetName={"forecastAccuracy"}
           columns={forecastAccuracyColumns}
-          data={forecastAccuracyData}
+          data={forecastAccuracyData2}
           styleOptions={{
             fixedTableLayout: size > 768 ? true : false,
             wrapHeaders: true,
           }}
-        /> */}
+        />
         {/* <br />
         <SimpleTable
           datasetName={"forecastModelComparison"}
