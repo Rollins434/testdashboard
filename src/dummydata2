@@ -1,0 +1,112 @@
+{
+  "forecast_A": [
+    {
+      "forecast_values": 80189.62544348954,
+      "coe_common_chnl": "AGENT"
+    },
+    {
+      "forecast_values": 47689.51582954267,
+      "coe_common_chnl": "INTERNET"
+    },
+    {
+      "forecast_values": 18655.14364181234,
+      "coe_common_chnl": "NATIONAL RETAIL"
+    },
+    {
+      "forecast_values": 25689.324444073256,
+      "coe_common_chnl": "OTHER"
+    },
+    {
+      "forecast_values": 6616.012965455524,
+      "coe_common_chnl": "OUTSIDE"
+    }
+  ],
+  "forecast_B": [
+    {
+      "forecast_values": 144351.2787402038,
+      "coe_common_chnl": "AGENT"
+    },
+    {
+      "forecast_values": 86190.40910763659,
+      "coe_common_chnl": "INTERNET"
+    },
+    {
+      "forecast_values": 28493.05983281261,
+      "coe_common_chnl": "NATIONAL RETAIL"
+    },
+    {
+      "forecast_values": 43434.54988237102,
+      "coe_common_chnl": "OTHER"
+    },
+    {
+      "forecast_values": 5804.950873076778,
+      "coe_common_chnl": "OUTSIDE"
+    }
+  ],
+  "actual": [
+    {
+      "actuals": 140991,
+      "coe_common_chnl": "AGENT"
+    },
+    {
+      "actuals": 87894,
+      "coe_common_chnl": "INTERNET"
+    },
+    {
+      "actuals": 30865,
+      "coe_common_chnl": "NATIONAL RETAIL"
+    },
+    {
+      "actuals": 46858,
+      "coe_common_chnl": "OTHER"
+    },
+    {
+      "actuals": 11919,
+      "coe_common_chnl": "OUTSIDE"
+    }
+  ],
+  "forecastA_percent": [
+    {
+      "coe_common_chnl": "AGENT",
+      "forecast_a_percent": 56.875705146775005
+    },
+    {
+      "coe_common_chnl": "INTERNET",
+      "forecast_a_percent": 54.25798783710227
+    },
+    {
+      "coe_common_chnl": "NATIONAL RETAIL",
+      "forecast_a_percent": 60.441093931029776
+    },
+    {
+      "coe_common_chnl": "OTHER",
+      "forecast_a_percent": 54.823774903054456
+    },
+    {
+      "coe_common_chnl": "OUTSIDE",
+      "forecast_a_percent": 55.50812119687494
+    }
+  ],
+  "forecastB_percent": [
+    {
+      "coe_common_chnl": "AGENT",
+      "forecast_b_percent": 102.3833285388456
+    },
+    {
+      "coe_common_chnl": "INTERNET",
+      "forecast_b_percent": 98.06176656840807
+    },
+    {
+      "coe_common_chnl": "NATIONAL RETAIL",
+      "forecast_b_percent": 92.31511366535756
+    },
+    {
+      "coe_common_chnl": "OTHER",
+      "forecast_b_percent": 92.69399010280213
+    },
+    {
+      "coe_common_chnl": "OUTSIDE",
+      "forecast_b_percent": 48.70333814142779
+    }
+  ]
+}
