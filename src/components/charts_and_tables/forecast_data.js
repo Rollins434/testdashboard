@@ -407,7 +407,8 @@ const raw_forecastAccuracyData2 = {
   ],
 };
 
-const forecastAccuracyData2Channels = ["AGENT", "INTERNET", "NATIONAL RETAIL", "OTHER", "OUTSIDE"];
+const forecastAccuracyData2Channels = raw_forecastAccuracyData2.actual.map((item) => item.coe_common_chnl);
+// ["AGENT", "INTERNET", "NATIONAL RETAIL", "OTHER", "OUTSIDE"];
 export let forecastAccuracyData2 = forecastAccuracyData2Channels.map((chnl) => ({
   channel: chnl,
   model_a_begin_forecast: +raw_forecastAccuracyData2.forecast_A.find((item) => item.coe_common_chnl === chnl).forecast_values.toFixed(),
